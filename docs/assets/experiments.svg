@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="480" viewBox="0 0 1280 480" role="img">
+<rect x="0" y="0" width="1280" height="480" rx="0" fill="#f5f8fc"/>
+<text x="46" y="40" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#089e91">04  /  EXPERIMENT DESIGN</text>
+<text x="46" y="94" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="36" font-weight="700" fill="#15243b">One framework. Four perspectives.</text>
+<text x="46" y="130" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#65758e">Change the learning signal. Keep the experiment configuration explicit.</text>
+<rect x="46" y="174" width="280" height="250" rx="18" fill="#ffffff" stroke="#dce4ef"/>
+<rect x="67" y="194" width="238" height="31" rx="9" fill="#e5f5f0"/>
+<text x="79" y="212" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="12" font-weight="700" fill="#089e91">MAIN METHOD</text>
+<text x="68" y="268" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="26" font-weight="700" fill="#15243b">VeriGate</text>
+<polyline points="69,290 303,290" fill="none" stroke="#e3e9f2" stroke-width="1" stroke-linejoin="round"/>
+<rect x="69" y="314" width="5" height="5" rx="2" fill="#089e91"/>
+<text x="86" y="321" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="400" fill="#65758e">Default gate</text>
+<rect x="69" y="344" width="5" height="5" rx="2" fill="#089e91"/>
+<text x="86" y="351" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="400" fill="#65758e">Scaling off</text>
+<rect x="69" y="374" width="5" height="5" rx="2" fill="#089e91"/>
+<text x="86" y="381" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="400" fill="#65758e">1 response</text>
+<rect x="348" y="174" width="280" height="250" rx="18" fill="#ffffff" stroke="#dce4ef"/>
+<rect x="369" y="194" width="238" height="31" rx="9" fill="#eeeafb"/>
+<text x="381" y="212" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="12" font-weight="700" fill="#7860df">GROUP VARIANT</text>
+<text x="370" y="268" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="26" font-weight="700" fill="#15243b">Group-relative</text>
+<polyline points="371,290 605,290" fill="none" stroke="#e3e9f2" stroke-width="1" stroke-linejoin="round"/>
+<rect x="371" y="314" width="5" height="5" rx="2" fill="#7860df"/>
+<text x="388" y="321" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="400" fill="#65758e">Default gate</text>
+<rect x="371" y="344" width="5" height="5" rx="2" fill="#7860df"/>
+<text x="388" y="351" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="400" fill="#65758e">Normalized scaling</text>
+<rect x="371" y="374" width="5" height="5" rx="2" fill="#7860df"/>
+<text x="388" y="381" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="400" fill="#65758e">8 responses</text>
+<rect x="650" y="174" width="280" height="250" rx="18" fill="#ffffff" stroke="#dce4ef"/>
+<rect x="671" y="194" width="238" height="31" rx="9" fill="#eaf0fa"/>
+<text x="683" y="212" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="12" font-weight="700" fill="#5279b8">CONTROL</text>
+<text x="672" y="268" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="26" font-weight="700" fill="#15243b">Baseline</text>
+<polyline points="673,290 907,290" fill="none" stroke="#e3e9f2" stroke-width="1" stroke-linejoin="round"/>
+<rect x="673" y="314" width="5" height="5" rx="2" fill="#5279b8"/>
+<text x="690" y="321" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="400" fill="#65758e">Gate disabled</text>
+<rect x="673" y="344" width="5" height="5" rx="2" fill="#5279b8"/>
+<text x="690" y="351" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="400" fill="#65758e">Scaling off</text>
+<rect x="673" y="374" width="5" height="5" rx="2" fill="#5279b8"/>
+<text x="690" y="381" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="400" fill="#65758e">1 response</text>
+<rect x="952" y="174" width="280" height="250" rx="18" fill="#ffffff" stroke="#dce4ef"/>
+<rect x="973" y="194" width="238" height="31" rx="9" fill="#faf0e4"/>
+<text x="985" y="212" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="12" font-weight="700" fill="#b87839">ABLATION</text>
+<text x="974" y="268" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="26" font-weight="700" fill="#15243b">Inverse gate</text>
+<polyline points="975,290 1209,290" fill="none" stroke="#e3e9f2" stroke-width="1" stroke-linejoin="round"/>
+<rect x="975" y="314" width="5" height="5" rx="2" fill="#b87839"/>
+<text x="992" y="321" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="400" fill="#65758e">Inverse gate</text>
+<rect x="975" y="344" width="5" height="5" rx="2" fill="#b87839"/>
+<text x="992" y="351" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="400" fill="#65758e">Scaling off</text>
+<rect x="975" y="374" width="5" height="5" rx="2" fill="#b87839"/>
+<text x="992" y="381" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="400" fill="#65758e">1 response</text>
+<text x="46" y="460" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#65758e">Preset defaults shown. Environment variables and Hydra arguments remain configurable.</text>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="290" viewBox="0 0 1280 290" role="img">
+<rect x="0" y="0" width="1280" height="290" rx="0" fill="#f5f8fc"/>
+<text x="46" y="39" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#089e91">05  /  EVALUATION LANDSCAPE</text>
+<text x="46" y="88" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="33" font-weight="700" fill="#15243b">Six reasoning benchmarks.</text>
+<text x="46" y="121" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#65758e">In-training validation with 16 sampled responses per prompt.</text>
+<rect x="46" y="157" width="184" height="88" rx="13" fill="#ffffff" stroke="#dce4ef"/>
+<text x="60" y="197" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#15243b">AIME24</text>
+<text x="60" y="223" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="9" font-weight="700" fill="#089e91">COMPETITION MATH</text>
+<rect x="247" y="157" width="184" height="88" rx="13" fill="#ffffff" stroke="#dce4ef"/>
+<text x="261" y="197" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#15243b">AIME25</text>
+<text x="261" y="223" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="9" font-weight="700" fill="#089e91">COMPETITION MATH</text>
+<rect x="448" y="157" width="184" height="88" rx="13" fill="#ffffff" stroke="#dce4ef"/>
+<text x="462" y="197" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#15243b">AMC</text>
+<text x="462" y="223" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="9" font-weight="700" fill="#089e91">COMPETITION MATH</text>
+<rect x="649" y="157" width="184" height="88" rx="13" fill="#ffffff" stroke="#dce4ef"/>
+<text x="663" y="197" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#15243b">MATH-500</text>
+<text x="663" y="223" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="9" font-weight="700" fill="#089e91">MATHEMATICAL REASONING</text>
+<rect x="850" y="157" width="184" height="88" rx="13" fill="#ffffff" stroke="#dce4ef"/>
+<text x="864" y="197" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#15243b">Minerva</text>
+<text x="864" y="223" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="9" font-weight="700" fill="#089e91">QUANTITATIVE REASONING</text>
+<rect x="1051" y="157" width="184" height="88" rx="13" fill="#ffffff" stroke="#dce4ef"/>
+<text x="1065" y="197" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#15243b">OlympiadBench</text>
+<text x="1065" y="223" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="9" font-weight="700" fill="#089e91">OLYMPIAD REASONING</text>
+</svg>

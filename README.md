@@ -62,6 +62,10 @@ Group-relative scaling subsequently multiplies rewards by $|A_i|+u$, where $A_i$
 
 ## Quick start
 
+<img src="docs/assets/workflow.png" alt="Reproducible workflow: prepare environment and checkpoints, inspect the dry run and data, train with an explicit configuration, and record logs, metrics, and weights." width="100%">
+
+<br>
+
 **Training target:** Linux, Bash, Python 3.12, and compatible NVIDIA CUDA GPUs. The default configuration requests **8 GPUs**. Required memory depends on models, sequence lengths, and parallelism; minimum GPU memory has not been measured here.
 
 ### 01 · Prepare the environment
@@ -111,12 +115,19 @@ The launcher uses your active environment and lets the trainer initialize Ray. L
 
 ## Experiments
 
+<img src="docs/assets/experiments.png" alt="Four experiment presets: VeriGate uses the default gate; group-relative adds normalized scaling with eight responses; baseline disables the gate; inverse uses the complementary gate." width="100%">
+
+<details>
+<summary><strong>Launch commands and preset defaults</strong></summary>
+
 | Preset | Entry point | Gate | Group scaling | Responses |
 | :-- | :-- | :-- | :-- | --: |
 | VeriGate | `verigate.sh` | Default | Off | 1 |
 | Group-relative | `group.sh` | Default | On, normalized by std | 8 |
 | Ungated baseline | `baseline.sh` | Off | Off | 1 |
 | Inverse ablation | `ablation_inverse.sh` | Inverse | Off | 1 |
+
+</details>
 
 Explicit environment variables override preset defaults. The group preset defaults to `GRPO_NORM_BY_STD=True`; use `False` for centered advantages without standard-deviation normalization.
 
@@ -149,11 +160,17 @@ Changing GPU count may require additional memory and parallelism adjustments. A 
 
 ### Evaluation and results
 
+<img src="docs/assets/benchmarks.png" alt="Evaluation benchmarks: AIME24, AIME25, AMC, MATH-500, Minerva, and OlympiadBench, with 16 sampled responses per prompt during validation." width="100%">
+
+
 Validation runs inside the trainer with 16 sampled responses per prompt. The supplied validation set is documented as 1,590 problems across AIME24, AIME25, AMC, MATH-500, Minerva, and OlympiadBench.
 
 See [recorded benchmark tables](docs/RESULTS.md) for the supplied avg@16 numbers. These reference measurements have **not been independently reproduced for this release**. Report exact checkpoints, seeds, hardware, and raw logs before drawing new experimental conclusions. A standalone offline evaluation harness is not included.
 
 ## Inside the repository
+
+<details>
+<summary><strong>Explore the project structure</strong></summary>
 
 ```text
 VeriGate/
@@ -169,6 +186,8 @@ VeriGate/
 ├── docs/                       # Results and reproducibility notes
 └── verl/                       # Training framework and its notices
 ```
+
+</details>
 
 The reward gate and group scaling live in [`ray_trainer.py`](verl/verl/trainer/ppo/ray_trainer.py), under `correctness_gated` and `grpo_scaled`. Configuration lives in [`rollout.py`](verl/verl/workers/config/rollout.py).
 
@@ -194,7 +213,7 @@ The vendored framework retains its [license](verl/LICENSE) and [notices](THIRD_P
 <details>
 <summary>Regenerate the figures</summary>
 
-The diagrams are repository-owned assets: editable SVG sources and matching 2× PNG renders. They use no external image hosting.
+All six diagrams include editable SVG sources and matching 2× PNG renders under `docs/assets/`. They use no external image hosting. The command below regenerates the original hero, training-loop, and reward-gate figures; the additional layout figures can be edited directly as SVG.
 
 ```bash
 python -m pip install Pillow
@@ -207,6 +226,11 @@ Rendering uses Segoe UI on Windows or DejaVu Sans on Linux. The bar heights in t
 
 <br>
 
+---
+
 <div align="center">
+
+[Back to top](#readme) &nbsp; · &nbsp; [Experiment records](docs/REPRODUCIBILITY.md) &nbsp; · &nbsp; [Reference results](docs/RESULTS.md)
+
 <sub><strong>VeriGate</strong> &nbsp; · &nbsp; Teacher guidance, grounded in verification.</sub>
 </div>

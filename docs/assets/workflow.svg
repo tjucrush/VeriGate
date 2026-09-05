@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="330" viewBox="0 0 1280 330" role="img">
+<rect x="0" y="0" width="1280" height="330" rx="0" fill="#101b30"/>
+<text x="46" y="42" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#77e1ce">03  /  REPRODUCIBLE WORKFLOW</text>
+<text x="46" y="95" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="34" font-weight="700" fill="#ffffff">Make every run traceable.</text>
+<text x="46" y="129" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#9eafc8">From explicit inputs to inspectable experiment records.</text>
+<polyline points="99,195 344,195" fill="none" stroke="#385068" stroke-width="2" stroke-linejoin="round"/>
+<polygon points="344,195 335.22417438109625,199.79425538604204 335.22417438109625,190.20574461395796" fill="#385068"/>
+<rect x="46" y="174" width="43" height="43" rx="13" fill="#203c4c"/>
+<text x="57" y="199" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#7ee5d1">01</text>
+<text x="46" y="257" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="22" font-weight="700" fill="#ffffff">Prepare</text>
+<text x="46" y="289" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#a8bad1">Environment + checkpoints</text>
+<polyline points="401,195 646,195" fill="none" stroke="#385068" stroke-width="2" stroke-linejoin="round"/>
+<polygon points="646,195 637.2241743810963,199.79425538604204 637.2241743810963,190.20574461395796" fill="#385068"/>
+<rect x="348" y="174" width="43" height="43" rx="13" fill="#302e50"/>
+<text x="359" y="199" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#c3adff">02</text>
+<text x="348" y="257" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="22" font-weight="700" fill="#ffffff">Inspect</text>
+<text x="348" y="289" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#a8bad1">Dry-run command + data</text>
+<polyline points="703,195 948,195" fill="none" stroke="#385068" stroke-width="2" stroke-linejoin="round"/>
+<polygon points="948,195 939.2241743810963,199.79425538604204 939.2241743810963,190.20574461395796" fill="#385068"/>
+<rect x="650" y="174" width="43" height="43" rx="13" fill="#203c4c"/>
+<text x="661" y="199" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#7ee5d1">03</text>
+<text x="650" y="257" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="22" font-weight="700" fill="#ffffff">Train</text>
+<text x="650" y="289" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#a8bad1">Preset + resolved config</text>
+<rect x="952" y="174" width="43" height="43" rx="13" fill="#302e50"/>
+<text x="963" y="199" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#c3adff">04</text>
+<text x="952" y="257" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="22" font-weight="700" fill="#ffffff">Record</text>
+<text x="952" y="289" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#a8bad1">Logs + metrics + weights</text>
+</svg>
