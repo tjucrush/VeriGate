@@ -1,0 +1,17 @@
+[
+  {
+    "file": "dapo-math-17k-train.parquet",
+    "bytes": 6790726,
+    "sha256": "24500ae4a000369a4fa0525b09b253b8248a560622a8aea9e6d937c4f123226d"
+  },
+  {
+    "file": "deepmath-level6-train.parquet",
+    "bytes": 7566817,
+    "sha256": "de3350fdd00bc0410550098ea65179e2be873da99e4075f80de575fc17670597"
+  },
+  {
+    "file": "valid_final_unique.parquet",
+    "bytes": 251872,
+    "sha256": "1ab214dd731759843da8aeb1c8e899394cc05c527780333ba3b7bdc8f6807c19"
+  }
+]
