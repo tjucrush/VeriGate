@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="650" viewBox="0 0 1280 650" role="img">
+<rect x="0" y="0" width="1280" height="650" rx="0" fill="#f5f8fc"/>
+<text x="46" y="41" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#089e91">01  /  THE TRAINING LOOP</text>
+<text x="46" y="95" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="37" font-weight="700" fill="#15243b">Two signals. One gated reward.</text>
+<text x="46" y="131" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="20" font-weight="400" fill="#65758e">Token-level guidance meets response-level correctness.</text>
+<polyline points="279,319 344,319" fill="none" stroke="#90a0b7" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="344,319 335.22417438109625,323.79425538604204 335.22417438109625,314.20574461395796" fill="#90a0b7"/>
+<polyline points="599,319 632,319 632,228 683,228" fill="none" stroke="#7860df" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="683,228 674.2241743810963,232.79425538604204 674.2241743810963,223.20574461395796" fill="#7860df"/>
+<polyline points="632,319 632,415 683,415" fill="none" stroke="#089e91" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="683,415 674.2241743810963,419.79425538604204 674.2241743810963,410.20574461395796" fill="#089e91"/>
+<polyline points="925,228 960,228 960,319 999,319" fill="none" stroke="#7860df" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="999,319 990.2241743810963,323.79425538604204 990.2241743810963,314.20574461395796" fill="#7860df"/>
+<polyline points="925,415 960,415 960,319" fill="none" stroke="#089e91" stroke-width="3" stroke-linejoin="round"/>
+<rect x="46" y="250" width="234" height="138" rx="16" fill="#ffffff" stroke="#dbe3ef"/>
+<text x="66" y="277" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="14" font-weight="700" fill="#15243b">01</text>
+<text x="66" y="312" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="22" font-weight="700" fill="#15243b">Reasoning prompt</text>
+<text x="66" y="343" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#65758e">Task + answer</text>
+<text x="66" y="366" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#65758e">verification rule</text>
+<rect x="344" y="250" width="255" height="138" rx="16" fill="#ffffff" stroke="#dbe3ef"/>
+<text x="364" y="277" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="14" font-weight="700" fill="#15243b">02</text>
+<text x="364" y="312" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="22" font-weight="700" fill="#15243b">Student rollout</text>
+<text x="364" y="343" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#65758e">Sample a response</text>
+<text x="364" y="366" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#65758e">Record token log probs</text>
+<rect x="683" y="168" width="242" height="132" rx="16" fill="#f0ecff"/>
+<text x="703" y="195" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="14" font-weight="700" fill="#7860df">03A</text>
+<text x="703" y="230" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="22" font-weight="700" fill="#7860df">Teacher guidance</text>
+<text x="703" y="261" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#65758e">Score sampled tokens</text>
+<text x="703" y="284" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#65758e">Compute log-prob ratio</text>
+<rect x="683" y="354" width="242" height="132" rx="16" fill="#e6f5f1"/>
+<text x="703" y="381" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="14" font-weight="700" fill="#089e91">03B</text>
+<text x="703" y="416" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="22" font-weight="700" fill="#089e91">Task verifier</text>
+<text x="703" y="447" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#65758e">Check the final answer</text>
+<text x="703" y="470" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#65758e">Return outcome score</text>
+<rect x="999" y="250" width="234" height="138" rx="16" fill="#16253d"/>
+<text x="1019" y="277" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="14" font-weight="700" fill="#ffffff">04</text>
+<text x="1019" y="312" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="22" font-weight="700" fill="#ffffff">Reward gate</text>
+<text x="1019" y="343" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#b9cbe1">Keep rewards aligned</text>
+<text x="1019" y="366" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#b9cbe1">with correctness</text>
+<polyline points="1115,388 1115,545 470,545 470,398" fill="none" stroke="#90a0b7" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="470,398 474.79425538604204,406.77582561890375 465.20574461395796,406.77582561890375" fill="#90a0b7"/>
+<rect x="640" y="522" width="356" height="46" rx="12" fill="#f5f8fc"/>
+<text x="660" y="549" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="700" fill="#15243b">Policy update with gated token rewards</text>
+<text x="46" y="615" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="400" fill="#65758e">OPTIONAL: group-relative scaling multiplies gated rewards by |A| + u before the update.</text>
+</svg>

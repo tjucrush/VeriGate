@@ -1,10 +1,10 @@
 # Reproducibility
 
-## Scope
+## Training setup
 
-The project is renamed VeriGate. Four duplicated launchers become one implementation. Hard-coded Conda activation, personal model paths, forced Ray shutdown, and default remote experiment logging are removed. Preset semantics are retained, including standard-deviation normalization in the group preset. The reward algorithm is unchanged.
+VeriGate provides four experiment presets through a shared launcher: verifier-gated distillation, group-relative scaling, an ungated baseline, and an inverse-gate ablation. Each preset accepts explicit environment overrides and additional Hydra arguments.
 
-Unrelated upstream documentation, recipes, examples, Docker recipes, and repository automation are excluded from the release. Framework code, its tests, installation scripts, and license notices remain.
+The launcher uses the active Python environment, validates configuration before allocating GPUs, and supports a command-only dry run. Console logging is enabled by default. The group-relative preset normalizes advantages by group standard deviation unless configured otherwise.
 
 ## Experiment records
 
@@ -18,7 +18,7 @@ Unrelated upstream documentation, recipes, examples, Docker recipes, and reposit
 
 CPU checks cover presets, environment overrides, argument forwarding, token budgets, missing-model errors, invalid groups, and dry-run side effects. They do not validate GPU kernels, model compatibility, verifier accuracy, convergence, or benchmark scores.
 
-The full GPU training environment has not been installed or run during this cleanup. Installation instructions follow the bundled installer; dependencies are not fully pinned.
+Full GPU training and benchmark reproduction have not been validated for this release. Installation instructions follow the bundled installer; dependencies are not fully pinned.
 
 ## Data
 

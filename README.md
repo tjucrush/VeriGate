@@ -1,37 +1,50 @@
 <div align="center">
 
-# VeriGate
+<img src="docs/assets/hero.png" alt="VeriGate — Verifier-Gated On-Policy Distillation" width="100%">
 
-### Verifier-Gated On-Policy Distillation for Reasoning Models
+<br>
 
-**Dense teacher guidance. Verifiable outcome feedback. One consistent reward.**
+**A research toolkit for learning from teacher guidance and verifiable outcomes.**
 
-Training &nbsp; / &nbsp; Controlled baselines &nbsp; / &nbsp; Group-relative scaling
+[Method](#method) &nbsp; · &nbsp; [Quick start](#quick-start) &nbsp; · &nbsp; [Experiments](#experiments) &nbsp; · &nbsp; [Results](docs/RESULTS.md) &nbsp; · &nbsp; [Reproducibility](docs/REPRODUCIBILITY.md)
 
-[Quick start](#quick-start) · [Method](#method) · [Experiments](#experiments) · [Reproducibility](docs/REPRODUCIBILITY.md)
+<sub>Python 3.12 &nbsp; / &nbsp; PyTorch &nbsp; / &nbsp; vLLM &nbsp; / &nbsp; CUDA</sub>
 
 </div>
 
----
+<br>
 
-VeriGate combines token-level teacher guidance with response-level verification. A student generates its own trajectories, a teacher scores the tokens, and a verifier gates the resulting distillation rewards according to answer correctness.
+VeriGate combines **token-level teacher guidance** with **response-level verification**. The student samples its own reasoning trajectories; a correctness gate filters distillation rewards before the policy update.
 
-One shared launcher provides the gated method, an ungated baseline, a group-relative variant, and an inverse-gate ablation. This release packages the supplied implementation under a new project name; the rename does not imply a new algorithm or newly reproduced results.
+<table>
+<tr>
+<td width="33%" valign="top">
+<strong>01 &nbsp; Dense guidance</strong><br><br>
+Teacher–student log ratios provide feedback at the token level.
+</td>
+<td width="33%" valign="top">
+<strong>02 &nbsp; Verified outcomes</strong><br><br>
+Answer correctness determines which reward signs survive the gate.
+</td>
+<td width="33%" valign="top">
+<strong>03 &nbsp; Controlled experiments</strong><br><br>
+Four presets share one launcher for consistent configuration.
+</td>
+</tr>
+</table>
 
 ## Method
 
-```mermaid
-flowchart LR
-    Q[Reasoning prompt] --> S[Student rollout]
-    S --> T[Teacher token scores]
-    S --> V[Answer verifier]
-    T --> D[Teacher–student log ratio]
-    S --> D
-    D --> G{Correctness gate}
-    V --> G
-    G --> R[Token rewards]
-    R --> U[Policy update]
-```
+<img src="docs/assets/method.png" alt="Training loop: student rollouts feed teacher scoring and answer verification; the correctness gate combines the signals before the policy update." width="100%">
+
+<p align="center"><sub><strong>Figure 1.</strong> Teacher scoring and task verification meet at the reward gate. Group-relative scaling is optional.</sub></p>
+
+<img src="docs/assets/reward-gate.png" alt="Correct responses keep positive rewards and remove negative rewards; incorrect responses keep negative rewards and remove positive rewards. Bars are illustrative." width="100%">
+
+<p align="center"><sub><strong>Figure 2.</strong> The gate filters reward signs by response correctness. Schematic values illustrate the rule.</sub></p>
+
+<details>
+<summary><strong>Mathematical formulation</strong></summary>
 
 For a sampled token, define
 
@@ -45,11 +58,13 @@ Correct responses retain non-negative distillation rewards; incorrect responses 
 
 Group-relative scaling subsequently multiplies rewards by $|A_i|+u$, where $A_i$ is a within-prompt outcome advantage. With $u=0$, uniform groups receive zero scaling.
 
+</details>
+
 ## Quick start
 
-**Training target:** Linux, Bash, Python 3.12, and compatible NVIDIA CUDA GPUs. The inherited configuration requests **8 GPUs**. Required memory depends on models, sequence lengths, and parallelism; minimum GPU memory has not been measured here.
+**Training target:** Linux, Bash, Python 3.12, and compatible NVIDIA CUDA GPUs. The default configuration requests **8 GPUs**. Required memory depends on models, sequence lengths, and parallelism; minimum GPU memory has not been measured here.
 
-### 1. Install
+### 01 · Prepare the environment
 
 From the repository root:
 
@@ -63,9 +78,14 @@ python -m pip check
 cd ..
 ```
 
+<details>
+<summary>Environment compatibility</summary>
+
 The bundled installer targets vLLM 0.11.0 and a Linux CPython 3.12 / CUDA 12 / Torch 2.8 FlashAttention wheel. Check compatibility with your machine. It downloads dependencies and is not a fully pinned environment specification.
 
-### 2. Set explicit checkpoints
+</details>
+
+### 02 · Choose your checkpoints
 
 ```bash
 export ACTOR_MODEL_PATH=/absolute/path/to/student
@@ -74,7 +94,7 @@ export REWARD_MODEL_PATH=/absolute/path/to/teacher
 
 Model IDs are also accepted. Use compatible tokenizer vocabularies and chat templates. `REWARD_MODEL_PATH` identifies the **teacher**; task verification is implemented separately. No personal machine paths or unverified checkpoint IDs are embedded in the launcher.
 
-### 3. Inspect and train
+### 03 · Inspect, then train
 
 ```bash
 # Print the command without loading models or starting Ray.
@@ -98,7 +118,7 @@ The launcher uses your active environment and lets the trainer initialize Ray. L
 | Ungated baseline | `baseline.sh` | Off | Off | 1 |
 | Inverse ablation | `ablation_inverse.sh` | Inverse | Off | 1 |
 
-Explicit environment variables override preset defaults. The group preset preserves the supplied script's `GRPO_NORM_BY_STD=True`; use `False` for centered advantages without standard-deviation normalization.
+Explicit environment variables override preset defaults. The group preset defaults to `GRPO_NORM_BY_STD=True`; use `False` for centered advantages without standard-deviation normalization.
 
 ```bash
 GRPO_NORM_BY_STD=False bash group.sh
@@ -108,6 +128,9 @@ bash verigate.sh trainer.total_epochs=1 trainer.test_freq=10
 ```
 
 Changing GPU count may require additional memory and parallelism adjustments. A dry run validates command construction only.
+
+<details>
+<summary><strong>Full configuration reference</strong></summary>
 
 | Variable | Default | Purpose |
 | :-- | :-- | :-- |
@@ -122,13 +145,15 @@ Changing GPU count may require additional memory and parallelism adjustments. A 
 | `TOTAL_EPOCHS` | `3` | Training epochs |
 | `FINAL_CKPT_DIR` | `checkpoints/<experiment>` | Output directory |
 
+</details>
+
 ### Evaluation and results
 
-Validation runs inside the trainer with 16 sampled responses per prompt. The original project describes the supplied validation set as 1,590 problems across AIME24, AIME25, AMC, MATH-500, Minerva, and OlympiadBench.
+Validation runs inside the trainer with 16 sampled responses per prompt. The supplied validation set is documented as 1,590 problems across AIME24, AIME25, AMC, MATH-500, Minerva, and OlympiadBench.
 
-See [recorded benchmark tables](docs/RESULTS.md) for the supplied avg@16 numbers. These are historical records, **not results reproduced by this cleanup**. Report exact checkpoints, seeds, hardware, and raw logs before drawing new experimental conclusions. A standalone offline evaluation harness is not included.
+See [recorded benchmark tables](docs/RESULTS.md) for the supplied avg@16 numbers. These reference measurements have **not been independently reproduced for this release**. Report exact checkpoints, seeds, hardware, and raw logs before drawing new experimental conclusions. A standalone offline evaluation harness is not included.
 
-## Repository map
+## Inside the repository
 
 ```text
 VeriGate/
@@ -140,6 +165,7 @@ VeriGate/
 ├── scripts/inspect_data.py     # Dataset hashes and optional schema inspection
 ├── tests/test_launcher.py      # CPU-only regression checks
 ├── datasets/                   # Supplied parquet files and hash manifest
+├── docs/assets/                # Diagrams: editable SVG + high-resolution PNG
 ├── docs/                       # Results and reproducibility notes
 └── verl/                       # Training framework and its notices
 ```
@@ -155,6 +181,32 @@ python scripts/inspect_data.py
 
 Launcher tests require Bash but no CUDA, Torch, or Ray. They do not replace distributed training tests. See [reproducibility notes](docs/REPRODUCIBILITY.md) for validation scope.
 
-## Licensing
+## Project notes
+
+<details>
+<summary>Licensing and provenance</summary>
+
 
 The vendored framework retains its [license](verl/LICENSE) and [notices](THIRD_PARTY_NOTICES.md). Model and dataset terms are separate. No blanket license is assigned to components without existing license metadata.
+
+</details>
+
+<details>
+<summary>Regenerate the figures</summary>
+
+The diagrams are repository-owned assets: editable SVG sources and matching 2× PNG renders. They use no external image hosting.
+
+```bash
+python -m pip install Pillow
+python scripts/build_readme_art.py
+```
+
+Rendering uses Segoe UI on Windows or DejaVu Sans on Linux. The bar heights in the gate illustration are schematic, not benchmark results.
+
+</details>
+
+<br>
+
+<div align="center">
+<sub><strong>VeriGate</strong> &nbsp; · &nbsp; Teacher guidance, grounded in verification.</sub>
+</div>

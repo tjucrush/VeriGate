@@ -1,6 +1,6 @@
 # Recorded benchmark results
 
-These numbers are preserved from the supplied project README. They have not been rerun or independently verified during the VeriGate cleanup. Renaming and launcher refactoring do not establish a new algorithm or new experimental results. Raw logs, seeds, hardware details, and checkpoint revisions are not included with these tables.
+These reference measurements accompany the supplied implementation and have not been independently reproduced for this release. Raw logs, seeds, hardware details, and checkpoint revisions are not included with these tables; treat the values as reference records rather than validated results for the current release.
 
 Metric: reported avg@16 (percent).
 

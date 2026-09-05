@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="552" viewBox="0 0 1280 552" role="img">
+<rect x="0" y="0" width="1280" height="552" rx="0" fill="#f5f8fc"/>
+<text x="46" y="41" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#089e91">02  /  REWARD GEOMETRY</text>
+<text x="46" y="89" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="33" font-weight="700" fill="#15243b">Keep the signal that agrees with the outcome.</text>
+<text x="46" y="127" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#65758e">Illustrative token rewards — schematic values, not experimental measurements.</text>
+<rect x="46" y="163" width="570" height="324" rx="18" fill="#ffffff" stroke="#dbe3ef"/>
+<rect x="69" y="184" width="7" height="52" rx="3" fill="#089e91"/>
+<text x="89" y="203" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="24" font-weight="700" fill="#15243b">Correct response</text>
+<text x="89" y="234" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="18" font-weight="700" fill="#089e91">r = max(d, 0)</text>
+<polyline points="81,346 580,346" fill="none" stroke="#ccd6e4" stroke-width="2" stroke-linejoin="round"/>
+<text x="60" y="348" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="14" font-weight="400" fill="#65758e">0</text>
+<rect x="99" y="298" width="28" height="48" rx="4" fill="#e6ebf3"/>
+<rect x="99" y="298" width="28" height="48" rx="4" fill="#089e91"/>
+<rect x="158" y="346" width="28" height="42" rx="4" fill="#e6ebf3"/>
+<polyline points="158,346 186,346" fill="none" stroke="#089e91" stroke-width="4" stroke-linejoin="round"/>
+<rect x="217" y="273" width="28" height="73" rx="4" fill="#e6ebf3"/>
+<rect x="217" y="273" width="28" height="73" rx="4" fill="#089e91"/>
+<rect x="276" y="346" width="28" height="29" rx="4" fill="#e6ebf3"/>
+<polyline points="276,346 304,346" fill="none" stroke="#089e91" stroke-width="4" stroke-linejoin="round"/>
+<rect x="335" y="311" width="28" height="35" rx="4" fill="#e6ebf3"/>
+<rect x="335" y="311" width="28" height="35" rx="4" fill="#089e91"/>
+<rect x="394" y="346" width="28" height="60" rx="4" fill="#e6ebf3"/>
+<polyline points="394,346 422,346" fill="none" stroke="#089e91" stroke-width="4" stroke-linejoin="round"/>
+<rect x="453" y="286" width="28" height="60" rx="4" fill="#e6ebf3"/>
+<rect x="453" y="286" width="28" height="60" rx="4" fill="#089e91"/>
+<rect x="512" y="346" width="28" height="38" rx="4" fill="#e6ebf3"/>
+<polyline points="512,346 540,346" fill="none" stroke="#089e91" stroke-width="4" stroke-linejoin="round"/>
+<text x="75" y="458" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="18" font-weight="700" fill="#089e91">Positive rewards retained</text>
+<rect x="665" y="163" width="570" height="324" rx="18" fill="#ffffff" stroke="#dbe3ef"/>
+<rect x="688" y="184" width="7" height="52" rx="3" fill="#7860df"/>
+<text x="708" y="203" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="24" font-weight="700" fill="#15243b">Incorrect response</text>
+<text x="708" y="234" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="18" font-weight="700" fill="#7860df">r = min(d, 0)</text>
+<polyline points="700,346 1199,346" fill="none" stroke="#ccd6e4" stroke-width="2" stroke-linejoin="round"/>
+<text x="679" y="348" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="14" font-weight="400" fill="#65758e">0</text>
+<rect x="718" y="298" width="28" height="48" rx="4" fill="#e6ebf3"/>
+<polyline points="718,346 746,346" fill="none" stroke="#7860df" stroke-width="4" stroke-linejoin="round"/>
+<rect x="777" y="346" width="28" height="42" rx="4" fill="#e6ebf3"/>
+<rect x="777" y="346" width="28" height="42" rx="4" fill="#7860df"/>
+<rect x="836" y="273" width="28" height="73" rx="4" fill="#e6ebf3"/>
+<polyline points="836,346 864,346" fill="none" stroke="#7860df" stroke-width="4" stroke-linejoin="round"/>
+<rect x="895" y="346" width="28" height="29" rx="4" fill="#e6ebf3"/>
+<rect x="895" y="346" width="28" height="29" rx="4" fill="#7860df"/>
+<rect x="954" y="311" width="28" height="35" rx="4" fill="#e6ebf3"/>
+<polyline points="954,346 982,346" fill="none" stroke="#7860df" stroke-width="4" stroke-linejoin="round"/>
+<rect x="1013" y="346" width="28" height="60" rx="4" fill="#e6ebf3"/>
+<rect x="1013" y="346" width="28" height="60" rx="4" fill="#7860df"/>
+<rect x="1072" y="286" width="28" height="60" rx="4" fill="#e6ebf3"/>
+<polyline points="1072,346 1100,346" fill="none" stroke="#7860df" stroke-width="4" stroke-linejoin="round"/>
+<rect x="1131" y="346" width="28" height="38" rx="4" fill="#e6ebf3"/>
+<rect x="1131" y="346" width="28" height="38" rx="4" fill="#7860df"/>
+<text x="694" y="458" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="18" font-weight="700" fill="#7860df">Negative rewards retained</text>
+<rect x="47" y="513" width="14" height="14" rx="3" fill="#e6ebf3"/>
+<text x="70" y="523" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="15" font-weight="400" fill="#65758e">Removed by the gate</text>
+<rect x="290" y="513" width="14" height="14" rx="3" fill="#089e91"/>
+<text x="314" y="523" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="15" font-weight="400" fill="#65758e">Retained reward</text>
+<text x="665" y="523" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="15" font-weight="400" fill="#65758e">d = teacher log probability − student log probability</text>
+</svg>
