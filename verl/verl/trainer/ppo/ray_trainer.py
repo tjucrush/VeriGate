@@ -42,6 +42,7 @@ from verl.single_controller.ray import RayClassWithInitArgs, RayResourcePool, Ra
 from verl.single_controller.ray.base import create_colocated_worker_cls
 from verl.trainer.config import AlgoConfig
 from verl.trainer.ppo import core_algos
+from verl.trainer.ppo.conserved_budget import conserved_budget_rewards, validate_budget_options
 from verl.trainer.ppo.core_algos import AdvantageEstimator, agg_loss
 from verl.trainer.ppo.metric_utils import (
     compute_data_metrics,
@@ -333,6 +334,25 @@ class RayPPOTrainer:
         self.resource_pool_manager = resource_pool_manager
         self.use_reference_policy = need_reference_policy(self.role_worker_mapping)
         self.use_rm = need_reward_model(self.role_worker_mapping)
+        budget_cfg = config.actor_rollout_ref.rollout
+        if budget_cfg.get("budgeted_distillation", False):
+            validate_budget_options(
+                budget_cfg.get("budget_prior_strength", 0.5),
+                budget_cfg.get("budget_uniform_mix", 0.05),
+                budget_cfg.get("budget_allocation", "teacher"),
+                budget_cfg.get("budget_mode", "loo"),
+                budget_cfg.get("budget_seed", 0),
+            )
+            if not self.use_rm or budget_cfg.get("log_prob_top_k", 0) != 0:
+                raise ValueError("Conserved budgets require a teacher and LOG_PROB_TOP_K=0")
+            if budget_cfg.get("grpo_scaled", False) or budget_cfg.get("correctness_gated_mode", "default") != "default":
+                raise ValueError("Conserved budgets cannot compose with legacy group scaling or inverse gating")
+            if not budget_cfg.get("correctness_gated", False):
+                raise ValueError("Conserved budgets require correctness_gated=True")
+            if config.algorithm.adv_estimator != "token_reward_direct" or config.algorithm.use_kl_in_reward:
+                raise ValueError("Conserved budgets require direct token advantages without in-reward KL")
+            if config.actor_rollout_ref.actor.loss_agg_mode != "seq-mean-token-sum":
+                raise ValueError("Conserved budgets require loss_agg_mode=seq-mean-token-sum")
         self.use_critic = need_critic(self.config)
         self.ray_worker_group_cls = ray_worker_group_cls
         self.device_name = device_name if device_name else self.config.trainer.device
@@ -1390,7 +1410,34 @@ class RayPPOTrainer:
                         # only clamp when a teacher/reward-model produced the distillation reward (token_level_rewards
                         # then differs from the task-correctness tensor true_reward_score).
                         rollout_cfg = self.config.actor_rollout_ref.rollout
-                        if (rollout_cfg.get("correctness_gated", False)
+                        if rollout_cfg.get("budgeted_distillation", False):
+                            if "true_reward_score" not in reward_extra_infos_dict:
+                                raise ValueError("Conserved budgets require explicit verifier scores, not teacher scores")
+                            if "uid" not in batch.non_tensor_batch:
+                                raise ValueError("Conserved budgets require prompt group IDs in uid")
+                            budget_mask = batch.batch["response_mask"]
+                            format_mask = reward_extra_infos_dict.get("format_mask", batch.batch.get("format_mask"))
+                            if format_mask is not None:
+                                format_mask = torch.as_tensor(format_mask, device=budget_mask.device)
+                                if format_mask.shape != (budget_mask.shape[0],):
+                                    raise ValueError("format_mask must have one entry per response")
+                                budget_mask = budget_mask * format_mask.unsqueeze(-1)
+                            budget_rewards, budget_metrics = conserved_budget_rewards(
+                                batch.batch["token_level_rewards"],
+                                batch.batch["true_reward_score"],
+                                budget_mask,
+                                batch.non_tensor_batch["uid"],
+                                threshold=rollout_cfg.get("correctness_threshold", 0.0),
+                                prior_strength=rollout_cfg.get("budget_prior_strength", 0.5),
+                                uniform_mix=rollout_cfg.get("budget_uniform_mix", 0.05),
+                                allocation=rollout_cfg.get("budget_allocation", "teacher"),
+                                budget_mode=rollout_cfg.get("budget_mode", "loo"),
+                                seed=rollout_cfg.get("budget_seed", 0),
+                            )
+                            batch.batch["token_level_rewards"] = budget_rewards
+                            batch.batch["token_level_scores"] = budget_rewards
+                            metrics.update(budget_metrics)
+                        elif (rollout_cfg.get("correctness_gated", False)
                                 and self.use_rm
                                 and "token_level_rewards" in batch.batch.keys()
                                 and "true_reward_score" in batch.batch.keys()):

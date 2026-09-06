@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="500" viewBox="0 0 1280 500" role="img">
+<rect x="0" y="0" width="1280" height="500" rx="0" fill="#f4f7fd"/>
+<text x="44" y="40" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#7860df">RESEARCH SPOTLIGHT  /  VERIGATE-CB</text>
+<text x="44" y="98" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="36" font-weight="700" fill="#15243b">The verifier sets the budget.</text>
+<text x="44" y="139" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="31" font-weight="700" fill="#089e91">The teacher decides where it goes.</text>
+<rect x="45" y="186" width="283" height="199" rx="20" fill="#122239"/>
+<text x="67" y="220" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="13" font-weight="700" fill="#9bafcd">01   RESPONSE BUDGET</text>
+<text x="68" y="271" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="20" font-weight="700" fill="#ffffff">A = outcome − baseline</text>
+<text x="68" y="319" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#aabbd2">Independent of teacher scale</text>
+<text x="68" y="351" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="14" font-weight="400" fill="#aabbd2">Smoothed within prompt groups</text>
+<polyline points="340,286 438,286" fill="none" stroke="#7860df" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="438,286 429.22417438109625,290.79425538604204 429.22417438109625,281.20574461395796" fill="#7860df"/>
+<rect x="455" y="186" width="360" height="199" rx="20" fill="#ffffff" stroke="#dce4ef"/>
+<text x="477" y="220" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="13" font-weight="700" fill="#7860df">02   TOKEN ALLOCATION</text>
+<rect x="482" y="308" width="24" height="24" rx="5" fill="#9580e7"/>
+<rect x="526" y="277" width="24" height="55" rx="5" fill="#9580e7"/>
+<rect x="570" y="296" width="24" height="36" rx="5" fill="#9580e7"/>
+<rect x="614" y="258" width="24" height="74" rx="5" fill="#9580e7"/>
+<rect x="658" y="289" width="24" height="43" rx="5" fill="#9580e7"/>
+<rect x="702" y="307" width="24" height="25" rx="5" fill="#9580e7"/>
+<rect x="746" y="270" width="24" height="62" rx="5" fill="#9580e7"/>
+<text x="477" y="366" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="15" font-weight="400" fill="#65758e">Non-negative weights sum to one</text>
+<polyline points="831,286 927,286" fill="none" stroke="#089e91" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="927,286 918.2241743810963,290.79425538604204 918.2241743810963,281.20574461395796" fill="#089e91"/>
+<rect x="942" y="186" width="293" height="199" rx="20" fill="#e3f5f0"/>
+<text x="964" y="220" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="13" font-weight="700" fill="#089e91">03   CONSERVED REWARD</text>
+<text x="964" y="276" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="25" font-weight="700" fill="#15243b">r = A × allocation</text>
+<text x="964" y="322" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="18" font-weight="700" fill="#089e91">Total signed mass = A</text>
+<text x="964" y="353" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="14" font-weight="400" fill="#65758e">Teacher / uniform / shuffled</text>
+<text x="45" y="444" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="13" font-weight="700" fill="#7860df">IMPLEMENTED, NOT YET TRAINED</text>
+<text x="45" y="474" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#65758e">A testable research hypothesis. Reward conservation does not guarantee better accuracy or invariant gradients.</text>
+</svg>

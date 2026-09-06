@@ -74,6 +74,24 @@ class LauncherTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertFalse(output.exists())
 
+    def test_budget_presets(self):
+        for method, allocation in [("budget", "teacher"), ("budget-uniform", "uniform"),
+                                   ("budget-shuffled", "shuffled")]:
+            result = self.run_launcher(method)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertIn("budgeted_distillation=True", result.stdout)
+            self.assertIn("budget_allocation=" + allocation, result.stdout)
+            self.assertIn("loss_agg_mode=seq-mean-token-sum", result.stdout)
+            self.assertIn("rollout.n=8", result.stdout)
+
+    def test_incompatible_budget_options(self):
+        for overrides in [{"LOG_PROB_TOP_K": "64"}, {"GRPO_SCALED": "True"},
+                          {"CORRECTNESS_GATED": "False"}, {"CORRECTNESS_GATED_MODE": "inverse"},
+                          {"LOSS_AGG_MODE": "token-mean"}, {"BUDGET_MODE": "typo"},
+                          {"BUDGET_ALLOCATION": "typo"}, {"BUDGET_SEED": "-1"}]:
+            with self.subTest(overrides=overrides):
+                self.assertEqual(self.run_launcher("budget", overrides).returncode, 2)
+
 
 if __name__ == "__main__":
     unittest.main()

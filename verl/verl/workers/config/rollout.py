@@ -143,6 +143,7 @@ class RolloutConfig(BaseConfig):
     top_k_strategy: str = "only_stu"  # "only_stu", "only_tch", "intersection", or "union"
     reward_weight_mode: str = "student_p"  # "student_p", "teacher_p", or "none"
     teacher_temperature: float = 1.0  # Temperature for teacher logits (default 1.0, no scaling)
+    seed: int = 0  # Sampling seed consumed by the vLLM rollout engine.
 
     # OPD variant: gate the distillation reward by per-response task correctness.
     # correct (true_reward_score > correctness_threshold) -> keep only rm_scores >= 0 (kl_val <= 0);
@@ -167,6 +168,14 @@ class RolloutConfig(BaseConfig):
     # (all-correct/all-wrong, where a_i = 0) still learn with distillation intensity u instead of being
     # zeroed. u = 0 recovers the strict behavior (uniform groups get no signal).
     grpo_scale_baseline: float = 0.0
+
+    # Experimental conserved outcome budgets; sampled-token rewards only.
+    budgeted_distillation: bool = False
+    budget_prior_strength: float = 0.5
+    budget_uniform_mix: float = 0.05
+    budget_allocation: str = "teacher"
+    budget_mode: str = "loo"
+    budget_seed: int = 0
 
     disable_log_stats: bool = True
 

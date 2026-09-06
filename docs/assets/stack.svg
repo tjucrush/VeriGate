@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="95" viewBox="0 0 1280 95" role="img">
+<rect x="0" y="0" width="1280" height="95" rx="0" fill="#0e192c"/>
+<text x="36" y="27" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="10" font-weight="700" fill="#8499b7">RUNTIME</text>
+<text x="36" y="62" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="24" font-weight="700" fill="#70e7cd">Python 3.12</text>
+<polyline points="314,20 314,74" fill="none" stroke="#2b3b54" stroke-width="1" stroke-linejoin="round"/>
+<text x="348" y="27" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="10" font-weight="700" fill="#8499b7">TRAINING</text>
+<text x="348" y="62" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="24" font-weight="700" fill="#b8a4ff">PyTorch</text>
+<polyline points="626,20 626,74" fill="none" stroke="#2b3b54" stroke-width="1" stroke-linejoin="round"/>
+<text x="660" y="27" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="10" font-weight="700" fill="#8499b7">ROLLOUT</text>
+<text x="660" y="62" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="24" font-weight="700" fill="#85baff">vLLM</text>
+<polyline points="938,20 938,74" fill="none" stroke="#2b3b54" stroke-width="1" stroke-linejoin="round"/>
+<text x="972" y="27" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="10" font-weight="700" fill="#8499b7">HARDWARE</text>
+<text x="972" y="62" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="24" font-weight="700" fill="#f2c987">CUDA / Linux</text>
+</svg>

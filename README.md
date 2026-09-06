@@ -1,14 +1,21 @@
 <div align="center">
 
-<img src="docs/assets/hero.png" alt="VeriGate — Verifier-Gated On-Policy Distillation" width="100%">
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/cover.png">
+  <img src="docs/assets/cover.gif" alt="VeriGate — animated signals flow into a verification gate. Teach the tokens. Verify the outcome." width="100%">
+</picture>
 
 <br>
 
 **A research toolkit for learning from teacher guidance and verifiable outcomes.**
 
-[Method](#method) &nbsp; · &nbsp; [Quick start](#quick-start) &nbsp; · &nbsp; [Experiments](#experiments) &nbsp; · &nbsp; [Results](docs/RESULTS.md) &nbsp; · &nbsp; [Reproducibility](docs/REPRODUCIBILITY.md)
+[🔬 Research](#research-spotlight) &nbsp; · &nbsp; [🧠 Method](#method) &nbsp; · &nbsp; [🚀 Quick start](#quick-start) &nbsp; · &nbsp; [🧪 Experiments](#experiments) &nbsp; · &nbsp; [📊 Results](docs/RESULTS.md)
 
-<sub>Python 3.12 &nbsp; / &nbsp; PyTorch &nbsp; / &nbsp; vLLM &nbsp; / &nbsp; CUDA</sub>
+<sub>[Static cover](docs/assets/cover.png) &nbsp; · &nbsp; [Reproducibility guide](docs/REPRODUCIBILITY.md) &nbsp; · &nbsp; [Conserved-budget design](docs/CONSERVED_BUDGET.md)</sub>
+
+<br>
+
+<img src="docs/assets/stack.png" alt="Technology stack: Python 3.12, PyTorch, vLLM, CUDA on Linux" width="100%">
 
 </div>
 
@@ -19,21 +26,55 @@ VeriGate combines **token-level teacher guidance** with **response-level verific
 <table>
 <tr>
 <td width="33%" valign="top">
-<strong>01 &nbsp; Dense guidance</strong><br><br>
+<strong>🧠 &nbsp; Dense guidance</strong><br><br>
 Teacher–student log ratios provide feedback at the token level.
 </td>
 <td width="33%" valign="top">
-<strong>02 &nbsp; Verified outcomes</strong><br><br>
+<strong>✓ &nbsp; Verified outcomes</strong><br><br>
 Answer correctness determines which reward signs survive the gate.
 </td>
 <td width="33%" valign="top">
-<strong>03 &nbsp; Controlled experiments</strong><br><br>
-Four presets share one launcher for consistent configuration.
+<strong>🧪 &nbsp; Controlled experiments</strong><br><br>
+Core presets and budget-allocation controls share one launcher.
 </td>
 </tr>
 </table>
 
+## Research spotlight
+
+<img src="docs/assets/budget-concept.png" alt="VeriGate-CB: the verifier sets a response-level budget, the teacher allocates it across tokens, and signed reward mass is conserved." width="100%">
+
+> [!NOTE]
+> **VeriGate-CB is an experimental research variant.** Its implementation and CPU checks are available; model training and benchmark validation have not been run.
+
+<table>
+<tr>
+<td width="50%" valign="top">
+<strong>The question</strong><br><br>
+Does teacher guidance help by locating useful tokens, or by changing the overall strength of an update?
+</td>
+<td width="50%" valign="top">
+<strong>The experiment</strong><br><br>
+Hold each response's reward budget fixed. Compare teacher-directed, uniform, and shuffled token allocation.
+</td>
+</tr>
+</table>
+
+```bash
+# Preview the new method without starting training.
+DRY_RUN=1 bash budget.sh
+
+# Print a multi-seed ablation plan. Training requires an explicit --execute.
+python scripts/run_ablation.py --output outputs/ablation-plan.json
+```
+
+<p align="center"><a href="docs/CONSERVED_BUDGET.md"><strong>Explore the mechanism, controls, and research plan →</strong></a></p>
+
+<br>
+
 ## Method
+
+**The core pipeline** · student-generated trajectories, teacher scores, and verifiable feedback.
 
 <img src="docs/assets/method.png" alt="Training loop: student rollouts feed teacher scoring and answer verification; the correctness gate combines the signals before the policy update." width="100%">
 
@@ -115,6 +156,8 @@ The launcher uses your active environment and lets the trainer initialize Ray. L
 
 ## Experiments
 
+**Core presets**
+
 <img src="docs/assets/experiments.png" alt="Four experiment presets: VeriGate uses the default gate; group-relative adds normalized scaling with eight responses; baseline disables the gate; inverse uses the complementary gate." width="100%">
 
 <details>
@@ -128,6 +171,16 @@ The launcher uses your active environment and lets the trainer initialize Ray. L
 | Inverse ablation | `ablation_inverse.sh` | Inverse | Off | 1 |
 
 </details>
+
+**Conserved-budget controls**
+
+| Method | Command | Allocation |
+| :-- | :-- | :-- |
+| **VeriGate-CB** | `bash budget.sh` | Teacher-directed |
+| Uniform control | `bash scripts/train.sh budget-uniform` | Equal weight per valid token |
+| Shuffled control | `bash scripts/train.sh budget-shuffled` | Seeded permutation of teacher weights |
+
+All three use the same response-budget rule and sequence-mean/token-sum aggregation. See the [research design](docs/CONSERVED_BUDGET.md) for limitations and matched comparisons.
 
 Explicit environment variables override preset defaults. The group preset defaults to `GRPO_NORM_BY_STD=True`; use `False` for centered advantages without standard-deviation normalization.
 
@@ -174,7 +227,9 @@ See [recorded benchmark tables](docs/RESULTS.md) for the supplied avg@16 numbers
 
 ```text
 VeriGate/
-├── verigate.sh                 # Main method
+├── verigate.sh                 # Core gated method
+├── budget.sh                   # Conserved-budget research variant
+├── scripts/run_ablation.py     # Explicit experiment plans and optional runner
 ├── group.sh                    # Group-relative variant
 ├── baseline.sh                 # Ungated baseline
 ├── ablation_inverse.sh         # Complementary gate ablation
@@ -194,11 +249,12 @@ The reward gate and group scaling live in [`ray_trainer.py`](verl/verl/trainer/p
 ## Development
 
 ```bash
+# Use an environment with PyTorch installed.
 python -m unittest discover -s tests -v
 python scripts/inspect_data.py
 ```
 
-Launcher tests require Bash but no CUDA, Torch, or Ray. They do not replace distributed training tests. See [reproducibility notes](docs/REPRODUCIBILITY.md) for validation scope.
+The complete CPU test suite requires Bash and PyTorch; it does not require CUDA or Ray. It covers reward invariants and launcher behavior, and does not replace distributed training tests. See [reproducibility notes](docs/REPRODUCIBILITY.md) for validation scope.
 
 ## Project notes
 
@@ -213,7 +269,7 @@ The vendored framework retains its [license](verl/LICENSE) and [notices](THIRD_P
 <details>
 <summary>Regenerate the figures</summary>
 
-All six diagrams include editable SVG sources and matching 2× PNG renders under `docs/assets/`. They use no external image hosting. The command below regenerates the original hero, training-loop, and reward-gate figures; the additional layout figures can be edited directly as SVG.
+The static diagrams include editable SVG sources and matching 2× PNG renders under `docs/assets/`. The animated cover also has a static alternative. They use no external image hosting. The command below regenerates the original hero, training-loop, and reward-gate figures; the additional layout figures can be edited directly as SVG.
 
 ```bash
 python -m pip install Pillow
@@ -232,5 +288,7 @@ Rendering uses Segoe UI on Windows or DejaVu Sans on Linux. The bar heights in t
 
 [Back to top](#readme) &nbsp; · &nbsp; [Experiment records](docs/REPRODUCIBILITY.md) &nbsp; · &nbsp; [Reference results](docs/RESULTS.md)
 
-<sub><strong>VeriGate</strong> &nbsp; · &nbsp; Teacher guidance, grounded in verification.</sub>
+<br>
+
+<img src="docs/assets/footer.png" alt="VeriGate — Reason, verify, refine." width="100%">
 </div>

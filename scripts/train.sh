@@ -9,6 +9,16 @@ METHOD="${1:-verigate}"
 if [[ $# -gt 0 ]]; then shift; fi
 case "$METHOD" in
     verigate) ;;
+    budget|budget-uniform|budget-shuffled)
+        export BUDGETED_DISTILLATION="${BUDGETED_DISTILLATION:-True}"
+        export N_RESPONSES="${N_RESPONSES:-8}"
+        export LOSS_AGG_MODE="${LOSS_AGG_MODE:-seq-mean-token-sum}"
+        if [[ "$METHOD" == budget-uniform ]]; then
+            export BUDGET_ALLOCATION="${BUDGET_ALLOCATION:-uniform}"
+        elif [[ "$METHOD" == budget-shuffled ]]; then
+            export BUDGET_ALLOCATION="${BUDGET_ALLOCATION:-shuffled}"
+        fi
+        ;;
     group)
         export GRPO_SCALED="${GRPO_SCALED:-True}"
         export GRPO_NORM_BY_STD="${GRPO_NORM_BY_STD:-True}"
@@ -16,7 +26,7 @@ case "$METHOD" in
         ;;
     baseline) export CORRECTNESS_GATED="${CORRECTNESS_GATED:-False}" ;;
     inverse) export CORRECTNESS_GATED_MODE="${CORRECTNESS_GATED_MODE:-inverse}" ;;
-    *) printf 'Unknown method: %s. Use verigate, group, baseline, or inverse.\n' "$METHOD" >&2; exit 2 ;;
+    *) printf 'Unknown method: %s. Use verigate, group, baseline, inverse, budget, budget-uniform, or budget-shuffled.\n' "$METHOD" >&2; exit 2 ;;
 esac
 
 export HYDRA_FULL_ERROR=1
@@ -48,6 +58,15 @@ export CORRECTNESS_GATED_MODE=${CORRECTNESS_GATED_MODE:-default}  # default | in
 export GRPO_SCALED=${GRPO_SCALED:-False}             # True = GRPD (needs N_RESPONSES>1)
 export GRPO_NORM_BY_STD=${GRPO_NORM_BY_STD:-False}   # False = Dr.GRPO style; True = /std
 export GRPO_SCALE_BASELINE=${GRPO_SCALE_BASELINE:-0.0}  # u in scale=|A|+u
+
+# Conserved-budget research variant. Legacy presets remain unchanged.
+export BUDGETED_DISTILLATION=${BUDGETED_DISTILLATION:-False}
+export BUDGET_PRIOR_STRENGTH=${BUDGET_PRIOR_STRENGTH:-0.5}
+export BUDGET_UNIFORM_MIX=${BUDGET_UNIFORM_MIX:-0.05}
+export BUDGET_ALLOCATION=${BUDGET_ALLOCATION:-teacher}
+export BUDGET_MODE=${BUDGET_MODE:-loo}
+export BUDGET_SEED=${BUDGET_SEED:-0}
+export LOSS_AGG_MODE=${LOSS_AGG_MODE:-token-mean}
 
 # ---- shared hypers ----
 export MAX_PROMPT_LENGTH=${MAX_PROMPT_LENGTH:-1024}
@@ -82,7 +101,7 @@ done
 if [[ -n "${LOG_PROB_MAX_TOKEN_LEN_PER_GPU:-}" && ! "$LOG_PROB_MAX_TOKEN_LEN_PER_GPU" =~ ^[1-9][0-9]*$ ]]; then
     echo 'LOG_PROB_MAX_TOKEN_LEN_PER_GPU must be a positive integer.' >&2; exit 2
 fi
-for name in CORRECTNESS_GATED GRPO_SCALED GRPO_NORM_BY_STD USE_KL; do
+for name in CORRECTNESS_GATED GRPO_SCALED GRPO_NORM_BY_STD USE_KL BUDGETED_DISTILLATION; do
     if [[ "${!name}" != True && "${!name}" != False ]]; then
         printf '%s must be True or False.\n' "$name" >&2; exit 2
     fi
@@ -92,6 +111,17 @@ if [[ "$CORRECTNESS_GATED_MODE" != default && "$CORRECTNESS_GATED_MODE" != inver
 fi
 if [[ "$GRPO_SCALED" == True && "$N_RESPONSES" -lt 2 ]]; then
     echo 'Group scaling requires N_RESPONSES >= 2.' >&2; exit 2
+fi
+if [[ "$BUDGETED_DISTILLATION" == True ]]; then
+    if [[ "$LOG_PROB_TOP_K" != 0 || "$GRPO_SCALED" != False || "$CORRECTNESS_GATED" != True || "$CORRECTNESS_GATED_MODE" != default ]]; then
+        echo 'Conserved budgets require sampled tokens, default correctness gating, and GRPO_SCALED=False.' >&2; exit 2
+    fi
+    if [[ "$LOSS_AGG_MODE" != seq-mean-token-sum ]]; then
+        echo 'Conserved budgets require LOSS_AGG_MODE=seq-mean-token-sum.' >&2; exit 2
+    fi
+    case "$BUDGET_ALLOCATION" in teacher|uniform|shuffled) ;; *) echo 'Invalid BUDGET_ALLOCATION.' >&2; exit 2 ;; esac
+    case "$BUDGET_MODE" in loo|fixed) ;; *) echo 'Invalid BUDGET_MODE.' >&2; exit 2 ;; esac
+    if [[ ! "$BUDGET_SEED" =~ ^[0-9]+$ ]]; then echo 'BUDGET_SEED must be a non-negative integer.' >&2; exit 2; fi
 fi
 
 MIN_TOKEN_LEN_PER_GPU=$(( MAX_PROMPT_LENGTH + MAX_RESP_LENGTH ))
@@ -131,7 +161,7 @@ COMMAND=("${PYTHON:-python3}" -m verl.trainer.main_ppo \
     actor_rollout_ref.actor.ppo_max_token_len_per_gpu="$PPO_MAX_TOKEN_LEN_PER_GPU" \
     actor_rollout_ref.actor.ulysses_sequence_parallel_size="$PARALLEL_SIZE" \
     "${KL_ARGS[@]}" \
-    actor_rollout_ref.actor.loss_agg_mode=token-mean \
+    actor_rollout_ref.actor.loss_agg_mode="$LOSS_AGG_MODE" \
     actor_rollout_ref.actor.fsdp_config.param_offload=False \
     actor_rollout_ref.actor.fsdp_config.optimizer_offload=False \
     actor_rollout_ref.actor.fsdp_config.forward_prefetch=True \
@@ -157,6 +187,12 @@ COMMAND=("${PYTHON:-python3}" -m verl.trainer.main_ppo \
     +actor_rollout_ref.rollout.grpo_scaled="$GRPO_SCALED" \
     +actor_rollout_ref.rollout.grpo_norm_by_std="$GRPO_NORM_BY_STD" \
     +actor_rollout_ref.rollout.grpo_scale_baseline="$GRPO_SCALE_BASELINE" \
+    +actor_rollout_ref.rollout.budgeted_distillation="$BUDGETED_DISTILLATION" \
+    +actor_rollout_ref.rollout.budget_prior_strength="$BUDGET_PRIOR_STRENGTH" \
+    +actor_rollout_ref.rollout.budget_uniform_mix="$BUDGET_UNIFORM_MIX" \
+    +actor_rollout_ref.rollout.budget_allocation="$BUDGET_ALLOCATION" \
+    +actor_rollout_ref.rollout.budget_mode="$BUDGET_MODE" \
+    +actor_rollout_ref.rollout.budget_seed="$BUDGET_SEED" \
     actor_rollout_ref.rollout.tensor_model_parallel_size="$PARALLEL_SIZE" \
     actor_rollout_ref.rollout.gpu_memory_utilization=0.5 \
     actor_rollout_ref.rollout.max_model_len=$((MAX_PROMPT_LENGTH + MAX_RESP_LENGTH)) \
