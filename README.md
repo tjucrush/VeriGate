@@ -1,3 +1,5 @@
+<a id="top"></a>
+
 <div align="center">
 
 <picture>
@@ -9,7 +11,7 @@
 
 **A research toolkit for learning from teacher guidance and verifiable outcomes.**
 
-[🔬 Research](#research-spotlight) &nbsp; · &nbsp; [🧠 Method](#method) &nbsp; · &nbsp; [🚀 Quick start](#quick-start) &nbsp; · &nbsp; [🧪 Experiments](#experiments) &nbsp; · &nbsp; [📊 Results](docs/RESULTS.md)
+[Research](#research-spotlight) &nbsp; · &nbsp; [Method](#method) &nbsp; · &nbsp; [Quick start](#quick-start) &nbsp; · &nbsp; [Experiments](#experiments) &nbsp; · &nbsp; [Results](docs/RESULTS.md)
 
 <sub>[Static cover](docs/assets/cover.png) &nbsp; · &nbsp; [Reproducibility guide](docs/REPRODUCIBILITY.md) &nbsp; · &nbsp; [Conserved-budget design](docs/CONSERVED_BUDGET.md)</sub>
 
@@ -23,24 +25,13 @@
 
 VeriGate combines **token-level teacher guidance** with **response-level verification**. The student samples its own reasoning trajectories; a correctness gate filters distillation rewards before the policy update.
 
-<table>
-<tr>
-<td width="33%" valign="top">
-<strong>🧠 &nbsp; Dense guidance</strong><br><br>
-Teacher–student log ratios provide feedback at the token level.
-</td>
-<td width="33%" valign="top">
-<strong>✓ &nbsp; Verified outcomes</strong><br><br>
-Answer correctness determines which reward signs survive the gate.
-</td>
-<td width="33%" valign="top">
-<strong>🧪 &nbsp; Controlled experiments</strong><br><br>
-Core presets and budget-allocation controls share one launcher.
-</td>
-</tr>
-</table>
+<img src="docs/assets/research-atlas.png" alt="Research atlas: conserved outcome budgets, adaptive concentration, and ordinal teacher evidence. Implemented mechanisms with training validation pending." width="100%">
+
+<p align="center"><a href="#research-spotlight">Conserved budgets</a> &nbsp; / &nbsp; <a href="#adaptive-concentration-control">Adaptive concentration</a> &nbsp; / &nbsp; <a href="#ordinal-evidence-allocation">Ordinal allocation</a></p>
 
 ## Research spotlight
+
+<img src="docs/assets/chapter-research.png" alt="Research spotlight" width="100%">
 
 <img src="docs/assets/budget-concept.png" alt="VeriGate-CB: the verifier sets a response-level budget, the teacher allocates it across tokens, and signed reward mass is conserved." width="100%">
 
@@ -114,15 +105,22 @@ Compare rank allocation with magnitude allocation, shuffled ranks, and uniform a
 
 ## Method
 
+<img src="docs/assets/chapter-method.png" alt="Method" width="100%">
+
 **The core pipeline** · student-generated trajectories, teacher scores, and verifiable feedback.
 
 <img src="docs/assets/method.png" alt="Training loop: student rollouts feed teacher scoring and answer verification; the correctness gate combines the signals before the policy update." width="100%">
 
 <p align="center"><sub><strong>Figure 1.</strong> Teacher scoring and task verification meet at the reward gate. Group-relative scaling is optional.</sub></p>
 
+<details>
+<summary><strong>Explore the reward geometry</strong></summary>
+
 <img src="docs/assets/reward-gate.png" alt="Correct responses keep positive rewards and remove negative rewards; incorrect responses keep negative rewards and remove positive rewards. Bars are illustrative." width="100%">
 
 <p align="center"><sub><strong>Figure 2.</strong> The gate filters reward signs by response correctness. Schematic values illustrate the rule.</sub></p>
+
+</details>
 
 <details>
 <summary><strong>Mathematical formulation</strong></summary>
@@ -143,7 +141,14 @@ Group-relative scaling subsequently multiplies rewards by $|A_i|+u$, where $A_i$
 
 ## Quick start
 
+<img src="docs/assets/chapter-start.png" alt="Quick start" width="100%">
+
+<details>
+<summary><strong>View the setup workflow</strong></summary>
+
 <img src="docs/assets/workflow.png" alt="Reproducible workflow: prepare environment and checkpoints, inspect the dry run and data, train with an explicit configuration, and record logs, metrics, and weights." width="100%">
+
+</details>
 
 <br>
 
@@ -195,6 +200,8 @@ bash ablation_inverse.sh
 The launcher uses your active environment and lets the trainer initialize Ray. Logs go to the console by default; enable experiment tracking with `LOGGER='["console","wandb"]'`.
 
 ## Experiments
+
+<img src="docs/assets/chapter-experiments.png" alt="Experiments" width="100%">
 
 **Core presets**
 
@@ -329,9 +336,9 @@ Rendering uses Segoe UI on Windows or DejaVu Sans on Linux. The bar heights in t
 
 <div align="center">
 
-[Back to top](#readme) &nbsp; · &nbsp; [Experiment records](docs/REPRODUCIBILITY.md) &nbsp; · &nbsp; [Reference results](docs/RESULTS.md)
+[Back to top](#top) &nbsp; · &nbsp; [Experiment records](docs/REPRODUCIBILITY.md) &nbsp; · &nbsp; [Reference results](docs/RESULTS.md)
 
 <br>
 
-<img src="docs/assets/footer.png" alt="VeriGate — Reason, verify, refine." width="100%">
+<img src="docs/assets/closing-panel.png" alt="VeriGate — A clearer signal. A testable idea. Explore the method, inspect the controls, and record the evidence." width="100%">
 </div>

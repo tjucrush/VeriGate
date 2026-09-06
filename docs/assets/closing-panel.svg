@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="240" viewBox="0 0 1280 240" role="img">
+<rect x="0" y="0" width="1280" height="240" rx="0" fill="#0c1528"/>
+<polyline points="880,200 960,90 1100,153 1260,36" fill="none" stroke="#1b314a" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="880,173 960,81 1100,138 1260,56" fill="none" stroke="#24455a" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="880,146 960,72 1100,123 1260,76" fill="none" stroke="#365a6f" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="880,119 960,63 1100,108 1260,96" fill="none" stroke="#3d6d77" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="880,92 960,54 1100,93 1260,116" fill="none" stroke="#64bcae" stroke-width="2" stroke-linejoin="round"/>
+<text x="48" y="49" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#76dfc5">VERIGATE</text>
+<text x="45" y="114" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="39" font-weight="700" fill="#f3f7ff">A clearer signal. A testable idea.</text>
+<text x="48" y="165" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#aabed8">Explore the method. Inspect the controls. Record the evidence.</text>
+<text x="48" y="212" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="12" font-weight="700" fill="#78a19f">ON-POLICY DISTILLATION   /   VERIFIABLE REASONING</text>
+</svg>

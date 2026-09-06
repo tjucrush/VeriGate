@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="150" viewBox="0 0 1280 150" role="img">
+<rect x="0" y="0" width="1280" height="150" rx="0" fill="#0e192d"/>
+<text x="44" y="90" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="58" font-weight="700" fill="#77dfc6">04</text>
+<polyline points="146,35 146,116" fill="none" stroke="#30455f" stroke-width="2" stroke-linejoin="round"/>
+<text x="179" y="63" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="34" font-weight="700" fill="#f5f8ff">Design the comparison</text>
+<text x="181" y="102" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="14" font-weight="700" fill="#adc0d9">PRESETS  /  CONTROLS  /  EVALUATION</text>
+<polyline points="1060,35 1020,116" fill="none" stroke="#21374f" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="1081,35 1041,116" fill="none" stroke="#21374f" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="1102,35 1062,116" fill="none" stroke="#21374f" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="1123,35 1083,116" fill="none" stroke="#21374f" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="1144,35 1104,116" fill="none" stroke="#21374f" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="1165,35 1125,116" fill="none" stroke="#21374f" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="1186,35 1146,116" fill="none" stroke="#21374f" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="1207,35 1167,116" fill="none" stroke="#21374f" stroke-width="2" stroke-linejoin="round"/>
+</svg>
