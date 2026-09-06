@@ -336,6 +336,8 @@ class RayPPOTrainer:
         self.use_rm = need_reward_model(self.role_worker_mapping)
         budget_cfg = config.actor_rollout_ref.rollout
         if budget_cfg.get("budgeted_distillation", False):
+            if config.actor_rollout_ref.actor.policy_loss.loss_mode != "gspo_token":
+                raise ValueError("Conserved budgets require policy_loss.loss_mode=gspo_token")
             validate_budget_options(
                 budget_cfg.get("budget_prior_strength", 0.5),
                 budget_cfg.get("budget_uniform_mix", 0.05),

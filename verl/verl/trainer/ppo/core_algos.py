@@ -30,6 +30,7 @@ from omegaconf import DictConfig
 
 import verl.utils.torch_functional as verl_F
 from verl.trainer.config import AlgoConfig
+from verl.trainer.ppo.gspo_token import gspo_token_loss
 from verl.utils import as_torch_index, group_mean_std
 from verl.utils.import_utils import deprecated
 from verl.workers.config import ActorConfig
@@ -1195,6 +1196,29 @@ def compute_policy_loss_vanilla(
         "actor/pg_clipfrac_lower": pg_clipfrac_lower.detach().item(),
     }
     return pg_loss, pg_metrics
+
+
+@register_policy_loss("gspo_token")
+def compute_policy_loss_gspo_token(
+    old_log_prob: torch.Tensor,
+    log_prob: torch.Tensor,
+    advantages: torch.Tensor,
+    response_mask: torch.Tensor,
+    loss_agg_mode: str = "seq-mean-token-sum",
+    config: Optional[DictConfig | ActorConfig] = None,
+    rollout_is_weights: torch.Tensor | None = None,
+    format_mask: torch.Tensor | None = None,
+) -> tuple[torch.Tensor, dict[str, Any]]:
+    """GSPO-token preserving allocated token rewards, including format masks."""
+    if config is None:
+        raise ValueError("GSPO-token requires actor configuration")
+    low = config.clip_ratio_low if config.clip_ratio_low is not None else config.clip_ratio
+    high = config.clip_ratio_high if config.clip_ratio_high is not None else config.clip_ratio
+    return gspo_token_loss(
+        old_log_prob, log_prob, advantages, response_mask,
+        clip_low=low, clip_high=high, loss_agg_mode=loss_agg_mode,
+        format_mask=format_mask, rollout_is_weights=rollout_is_weights,
+    )
 
 
 @register_policy_loss("gspo")

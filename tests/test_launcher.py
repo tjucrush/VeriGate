@@ -12,6 +12,19 @@ BASH = os.environ.get("BASH_EXECUTABLE") or shutil.which("bash")
 
 @unittest.skipUnless(BASH, "Bash is required")
 class LauncherTests(unittest.TestCase):
+    def test_gspo_is_selected_for_every_public_preset(self):
+        for method in ["verigate", "group", "baseline", "inverse", "budget", "budget-rank", "budget-ess"]:
+            result = self.run_launcher(method)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            for expected in ["verl.trainer.main_gspo", "policy_loss.loss_mode=gspo_token",
+                             "clip_ratio_low=0.0003", "clip_ratio_high=0.0004",
+                             "loss_agg_mode=seq-mean-token-sum"]:
+                self.assertIn(expected, result.stdout)
+
+    def test_gspo_rejects_topk_and_token_mean(self):
+        for overrides in [{"LOG_PROB_TOP_K": "64"}, {"LOSS_AGG_MODE": "token-mean"}]:
+            self.assertEqual(self.run_launcher(overrides=overrides).returncode, 2)
+
     def run_launcher(self, method="verigate", overrides=None, arguments=()):
         env = {k: v for k, v in os.environ.items() if k in (
             "PATH", "SYSTEMROOT", "WINDIR", "TEMP", "TMP", "HOME", "COMSPEC")}

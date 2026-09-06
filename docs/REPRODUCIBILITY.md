@@ -2,7 +2,9 @@
 
 ## Training setup
 
-VeriGate provides four experiment presets through a shared launcher: verifier-gated distillation, group-relative scaling, an ungated baseline, and an inverse-gate ablation. Each preset accepts explicit environment overrides and additional Hydra arguments.
+VeriGate provides verifier-gated, group-scaled, ungated, inverse-gate, and conserved-budget reward presets through a shared GSPO-token launcher. Conserved-budget controls include magnitude, rank, uniform, and shuffled allocation. Each preset accepts explicit environment overrides and additional Hydra arguments.
+
+All presets select `verl.trainer.main_gspo` and `policy_loss.loss_mode=gspo_token`, with lower/upper sequence clipping widths 0.0003/0.0004, direct token advantages, and sequence-mean/token-sum aggregation. The active objective has no critic or negative dual clip. See [GSPO-token](GSPO_TOKEN.md) for exact stop-gradient, masking, and distributed averaging semantics. Record the sequence clipping and numerical-guard diagnostics with each run.
 
 The launcher uses the active Python environment, validates configuration before allocating GPUs, and supports a command-only dry run. Console logging is enabled by default. The group-relative preset normalizes advantages by group standard deviation unless configured otherwise.
 

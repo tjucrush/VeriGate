@@ -77,7 +77,7 @@ bash scripts/train.sh budget-uniform
 bash scripts/train.sh budget-shuffled
 ```
 
-Only sampled-token rewards (`LOG_PROB_TOP_K=0`) are supported. Use `seq-mean-token-sum` loss aggregation to avoid an additional length divisor. The preset sets this automatically. Legacy group scaling, inverse gating, in-reward KL, and non-direct advantage estimators are rejected. Legacy presets remain available separately.
+Only sampled-token rewards (`LOG_PROB_TOP_K=0`) are supported. All public presets use [GSPO-token](GSPO_TOKEN.md), with sequence-mean/token-sum aggregation. Sequence clipping preserves local allocation gradients through the GSPO-token stop-gradient construction. Group scaling, inverse gating, in-reward KL, and non-direct advantage estimators cannot be combined with conserved budgets. Separate reward controls remain available under the common GSPO-token backend.
 
 | Setting | Default | Purpose |
 | --- | --- | --- |

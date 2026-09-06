@@ -72,7 +72,9 @@ export BUDGET_ALLOCATION=${BUDGET_ALLOCATION:-teacher}
 export BUDGET_MODE=${BUDGET_MODE:-loo}
 export BUDGET_SEED=${BUDGET_SEED:-0}
 export BUDGET_MIN_EFFECTIVE_FRACTION=${BUDGET_MIN_EFFECTIVE_FRACTION:-0.0}
-export LOSS_AGG_MODE=${LOSS_AGG_MODE:-token-mean}
+export LOSS_AGG_MODE=${LOSS_AGG_MODE:-seq-mean-token-sum}
+export GSPO_CLIP_LOW=${GSPO_CLIP_LOW:-0.0003}
+export GSPO_CLIP_HIGH=${GSPO_CLIP_HIGH:-0.0004}
 
 # ---- shared hypers ----
 export MAX_PROMPT_LENGTH=${MAX_PROMPT_LENGTH:-1024}
@@ -118,6 +120,9 @@ fi
 if [[ "$GRPO_SCALED" == True && "$N_RESPONSES" -lt 2 ]]; then
     echo 'Group scaling requires N_RESPONSES >= 2.' >&2; exit 2
 fi
+if [[ "$LOG_PROB_TOP_K" != 0 || "$LOSS_AGG_MODE" != seq-mean-token-sum ]]; then
+    echo 'GSPO-token requires LOG_PROB_TOP_K=0 and LOSS_AGG_MODE=seq-mean-token-sum.' >&2; exit 2
+fi
 if [[ "$BUDGETED_DISTILLATION" == True ]]; then
     if [[ "$LOG_PROB_TOP_K" != 0 || "$GRPO_SCALED" != False || "$CORRECTNESS_GATED" != True || "$CORRECTNESS_GATED_MODE" != default ]]; then
         echo 'Conserved budgets require sampled tokens, default correctness gating, and GRPO_SCALED=False.' >&2; exit 2
@@ -143,7 +148,7 @@ else
     KL_ARGS=(actor_rollout_ref.actor.use_kl_loss=False actor_rollout_ref.actor.kl_loss_coef=0.00 actor_rollout_ref.actor.kl_loss_type=low_var_kl actor_rollout_ref.actor.entropy_coeff=0)
 fi
 
-COMMAND=("${PYTHON:-python3}" -m verl.trainer.main_ppo \
+COMMAND=("${PYTHON:-python3}" -m verl.trainer.main_gspo \
     algorithm.adv_estimator="$ADV_ESTIMATOR" \
     algorithm.use_kl_in_reward=False \
     data.train_files="$TRAIN_DATASET" \
@@ -161,6 +166,10 @@ COMMAND=("${PYTHON:-python3}" -m verl.trainer.main_ppo \
     actor_rollout_ref.model.enable_activation_offload=True \
     actor_rollout_ref.model.enable_gradient_checkpointing=True \
     actor_rollout_ref.actor.optim.lr="${ACTOR_LR:-1e-6}" \
+    actor_rollout_ref.actor.policy_loss.loss_mode=gspo_token \
+    actor_rollout_ref.actor.clip_ratio_low="$GSPO_CLIP_LOW" \
+    actor_rollout_ref.actor.clip_ratio_high="$GSPO_CLIP_HIGH" \
+    actor_rollout_ref.actor.ppo_epochs=1 \
     actor_rollout_ref.actor.ppo_mini_batch_size="$MINI_BATCH_SIZE" \
     actor_rollout_ref.actor.use_dynamic_bsz=True \
     actor_rollout_ref.actor.ppo_micro_batch_size_per_gpu=1 \

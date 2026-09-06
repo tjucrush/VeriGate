@@ -48,6 +48,7 @@ def make_plan(variants, seeds, learning_rates, steps):
                 experiment = f"cb_{variant}_seed{seed}_lr{rate}"
                 environment = {
                     "N_RESPONSES": "8", "LOSS_AGG_MODE": "seq-mean-token-sum",
+                    "GSPO_CLIP_LOW": "0.0003", "GSPO_CLIP_HIGH": "0.0004",
                     "ACTOR_LR": str(rate), "BUDGET_SEED": str(seed),
                     "BUDGETED_DISTILLATION": "True" if method.startswith("budget") else "False",
                     "BUDGET_ALLOCATION": "uniform" if method == "budget-uniform" else (

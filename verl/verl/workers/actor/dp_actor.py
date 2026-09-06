@@ -791,6 +791,12 @@ class DataParallelPPOActor(BasePPOActor):
         metrics = {}
         for _ in range(self.config.ppo_epochs):
             for batch_idx, mini_batch in enumerate(mini_batches):
+                gspo_active_count = None
+                if self.config.policy_loss.get("loss_mode", "vanilla") == "gspo_token":
+                    valid_rows = mini_batch.batch["response_mask"].bool().any(-1)
+                    if "format_mask" in mini_batch.batch:
+                        valid_rows = valid_rows & mini_batch.batch["format_mask"].bool().reshape(-1)
+                    gspo_active_count = max(1, int(valid_rows.sum().item()))
                 if self.config.use_dynamic_bsz:
                     max_token_len = self.config.ppo_max_token_len_per_gpu * self.ulysses_sequence_parallel_size
                     micro_batches, _ = prepare_dynamic_batch(mini_batch, max_token_len=max_token_len)
@@ -849,10 +855,16 @@ class DataParallelPPOActor(BasePPOActor):
                     format_mask = None
                     if "format_mask" in model_inputs.keys():
                         format_mask = model_inputs["format_mask"]
+                    if gspo_active_count is not None:
+                        valid_rows = response_mask.bool().any(-1)
+                        if format_mask is not None:
+                            valid_rows = valid_rows & format_mask.bool().reshape(-1)
+                        loss_scale_factor = int(valid_rows.sum().item()) / gspo_active_count
             
 
                     # for fully_async_policy recipe
-                    if hasattr(self.config, "use_rollout_log_probs") and self.config.use_rollout_log_probs:
+                    if (self.config.policy_loss.get("loss_mode", "vanilla") == "gspo_token"
+                            or (hasattr(self.config, "use_rollout_log_probs") and self.config.use_rollout_log_probs)):
                         old_log_prob = model_inputs["old_log_probs"]
                     else:
                         if on_policy:

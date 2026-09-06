@@ -133,7 +133,7 @@ Given verifier score $s$ and threshold $\tau$, the default gate applies
 
 $$r_t = \begin{cases}\max(d_t,0), & s>\tau,\\\min(d_t,0), & s\leq\tau.\end{cases}$$
 
-Correct responses retain non-negative distillation rewards; incorrect responses retain non-positive rewards. This describes reward signs, not a guarantee about every parameter update. The top-k variant gates weighted distillation rewards.
+Correct responses retain non-negative distillation rewards; incorrect responses retain non-positive rewards. This describes reward signs, not a guarantee about every parameter update. Training uses sampled-token evidence with **GSPO-token**.
 
 Group-relative scaling subsequently multiplies rewards by $|A_i|+u$, where $A_i$ is a within-prompt outcome advantage. With $u=0$, uniform groups receive zero scaling.
 
@@ -232,11 +232,14 @@ The launcher uses your active environment and lets the trainer initialize Ray. L
 
 These variants use the same response-budget rule and sequence-mean/token-sum aggregation. See the [research design](docs/CONSERVED_BUDGET.md) for limitations and matched comparisons.
 
+> **Sequence-level trust · Token-level guidance**<br>
+> Every launcher uses **GSPO-token**: one importance ratio per response, local gradients per token, and asymmetric sequence clipping at **0.0003 / 0.0004**. Conserved budgets keep their positional effect; no critic or negative dual clip is used. [Explore the update rule →](docs/GSPO_TOKEN.md)
+
 Explicit environment variables override preset defaults. The group preset defaults to `GRPO_NORM_BY_STD=True`; use `False` for centered advantages without standard-deviation normalization.
 
 ```bash
 GRPO_NORM_BY_STD=False bash group.sh
-LOG_PROB_TOP_K=64 bash verigate.sh
+GSPO_CLIP_LOW=0.0003 GSPO_CLIP_HIGH=0.0004 bash verigate.sh
 NGPUS_PER_NODE=4 MINI_BATCH_SIZE=128 bash verigate.sh
 bash verigate.sh trainer.total_epochs=1 trainer.test_freq=10
 ```
@@ -248,7 +251,8 @@ Changing GPU count may require additional memory and parallelism adjustments. A 
 
 | Variable | Default | Purpose |
 | :-- | :-- | :-- |
-| `LOG_PROB_TOP_K` | `0` | Sampled-token rewards; positive values enable top-k |
+| `LOG_PROB_TOP_K` | `0` | Required: sampled-token rewards; top-k is rejected |
+| `GSPO_CLIP_LOW` / `GSPO_CLIP_HIGH` | `0.0003` / `0.0004` | Lower / upper sequence clipping widths |
 | `CORRECTNESS_THRESHOLD` | `0.0` | Correct iff summed verifier score exceeds threshold |
 | `GRPO_SCALE_BASELINE` | `0.0` | Additive floor in group scaling |
 | `MAX_PROMPT_LENGTH` / `MAX_RESP_LENGTH` | `1024` / `8192` | Token budgets |
