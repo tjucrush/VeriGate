@@ -31,8 +31,8 @@ def validate_budget_options(prior_strength, uniform_mix, allocation, budget_mode
         raise ValueError("budget_prior_strength must be finite and non-negative")
     if not math.isfinite(uniform_mix) or not 0 <= uniform_mix <= 1:
         raise ValueError("budget_uniform_mix must be in [0, 1]")
-    if allocation not in {"teacher", "uniform", "shuffled"}:
-        raise ValueError("budget_allocation must be teacher, uniform, or shuffled")
+    if allocation not in {"teacher", "uniform", "shuffled", "rank", "rank-shuffled"}:
+        raise ValueError("budget_allocation must be teacher, uniform, shuffled, rank, or rank-shuffled")
     if budget_mode not in {"loo", "fixed"}:
         raise ValueError("budget_mode must be loo or fixed")
     if isinstance(seed, bool) or not isinstance(seed, int) or seed < 0:
@@ -62,6 +62,7 @@ def conserved_budget_rewards(
     (n_g-1+2*alpha), and A_i=c_i-b_i. A singleton without a prior uses
     b_i=0.5. Empty responses are excluded from both group counts and outputs.
     Fixed mode sets b_i=0.5 for every response.
+    Rank modes replace evidence magnitudes with average positive-support ranks.
 
     Allocation is normalized positive sign-aligned teacher reward, mixed with
     uniform mass. No aligned evidence falls back to uniform allocation. Thus
@@ -131,9 +132,23 @@ def conserved_budget_rewards(
     lengths = mask.sum(-1, keepdim=True)
     uniform = mask.to(dtype) / lengths.clamp_min(1)
     weights = torch.where(mass > 0, relative / mass.clamp_min(1), uniform)
+    if allocation in {"rank", "rank-shuffled"}:
+        # Average ranks among strictly positive aligned values preserve ties.
+        # Exclude zero evidence and padding; no support still falls back to uniform.
+        weights = uniform.clone()
+        for row in range(batch_size):
+            positions = (aligned[row] > 0).nonzero(as_tuple=True)[0]
+            if positions.numel() == 0:
+                continue
+            _, inverse, ties = torch.unique(aligned[row, positions], sorted=True,
+                                            return_inverse=True, return_counts=True)
+            ends = ties.cumsum(0).to(dtype)
+            ranks = (ends - (ties.to(dtype) - 1) / 2)[inverse]
+            weights[row] = 0
+            weights[row, positions] = ranks / ranks.sum()
     if allocation == "uniform":
         weights = uniform
-    elif allocation == "shuffled":
+    elif allocation in {"shuffled", "rank-shuffled"}:
         # Seeded within-response permutation preserves mass/concentration while
         # removing alignment with positions. The same prompt/length uses the
         # same permutation, independent of batch order and padding width.

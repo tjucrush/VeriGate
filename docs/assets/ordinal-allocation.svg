@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img">
+<rect x="0" y="0" width="1280" height="640" rx="0" fill="#101b30"/>
+<text x="48" y="43" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#78e0cb">VERIGATE LAB  /  ORDINAL ALLOCATION</text>
+<text x="48" y="107" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="42" font-weight="700" fill="#ffffff">Trust the order. Test the magnitude.</text>
+<text x="48" y="146" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="20" font-weight="400" fill="#afc1db">A controlled research question: which part of teacher guidance matters?</text>
+<rect x="48" y="190" width="368" height="128" rx="18" fill="#192a43" stroke="#344b68"/>
+<text x="71" y="226" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="700" fill="#76ddc7">01</text>
+<text x="110" y="229" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="25" font-weight="700" fill="#ffffff">VERIFY</text>
+<text x="71" y="283" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#bacce1">Set the signed response budget.</text>
+<rect x="456" y="190" width="368" height="128" rx="18" fill="#192a43" stroke="#344b68"/>
+<text x="479" y="226" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="700" fill="#baa2ff">02</text>
+<text x="518" y="229" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="25" font-weight="700" fill="#ffffff">RANK</text>
+<text x="479" y="283" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#bacce1">Allocate by positive evidence rank.</text>
+<rect x="864" y="190" width="368" height="128" rx="18" fill="#192a43" stroke="#344b68"/>
+<text x="887" y="226" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="700" fill="#8ac8ff">03</text>
+<text x="926" y="229" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="25" font-weight="700" fill="#ffffff">REGULATE</text>
+<text x="887" y="283" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#bacce1">Enforce the effective-token floor.</text>
+<rect x="48" y="346" width="1184" height="215" rx="20" fill="#17263d"/>
+<text x="74" y="381" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="700" fill="#baa2ff">SAME ORDER, DIFFERENT AMPLITUDES</text>
+<text x="74" y="434" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="27" font-weight="700" fill="#ffffff">Evidence A     1 : 2 : 10</text>
+<text x="74" y="486" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="27" font-weight="700" fill="#ffffff">Evidence B     1 : 4 : 100</text>
+<polyline points="475,440 596,440" fill="none" stroke="#76ddc7" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="596,440 587.2241743810963,444.79425538604204 587.2241743810963,435.20574461395796" fill="#76ddc7"/>
+<text x="629" y="430" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="27" font-weight="700" fill="#76ddc7">Rank allocation     1 : 2 : 3</text>
+<text x="629" y="473" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#bacce1">Same weights before the shared ESS step.</text>
+<text x="48" y="603" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="400" fill="#a9bdd8">Synthetic illustration  /  Positive evidence only  /  Ties receive average ranks</text>
+<text x="48" y="630" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="15" font-weight="400" fill="#8da5c5">Experimental mechanism. Accuracy and runtime impact require training and profiling.</text>
+</svg>

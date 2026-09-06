@@ -20,6 +20,13 @@ class LauncherTests(unittest.TestCase):
         return subprocess.run([BASH, "scripts/train.sh", method, *arguments],
                               cwd=str(ROOT), env=env, text=True, capture_output=True)
 
+    def test_rank_presets(self):
+        for method, allocation in [("budget-rank", "rank"), ("budget-rank-shuffled", "rank-shuffled")]:
+            result = self.run_launcher(method)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertIn("budget_allocation=" + allocation, result.stdout)
+            self.assertIn("budget_min_effective_fraction=0.25", result.stdout)
+
     def test_presets(self):
         for method, expected in {
             "verigate": "correctness_gated=True",

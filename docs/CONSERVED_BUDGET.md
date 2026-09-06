@@ -83,7 +83,7 @@ Only sampled-token rewards (`LOG_PROB_TOP_K=0`) are supported. Use `seq-mean-tok
 | --- | --- | --- |
 | `BUDGET_PRIOR_STRENGTH` | `0.5` | Symmetric prior; zero is the no-prior ablation |
 | `BUDGET_UNIFORM_MIX` | `0.05` | Uniform allocation floor |
-| `BUDGET_ALLOCATION` | `teacher` | `teacher`, `uniform`, or seeded `shuffled` |
+| `BUDGET_ALLOCATION` | `teacher` | `teacher`, `uniform`, seeded `shuffled`, `rank`, or `rank-shuffled` |
 | `BUDGET_MODE` | `loo` | Leave-one-out or `fixed` response budget |
 | `BUDGET_SEED` | `0` | Reproducible within-response permutation |
 | `BUDGET_MIN_EFFECTIVE_FRACTION` | `0.0`; `0.25` in `budget-ess` | Minimum inverse-concentration fraction; zero disables |
@@ -132,3 +132,42 @@ CPU tests cover scalar-reference budgets, permutation and padding behavior, empt
 - [Effective Sample Size for Importance Sampling based on discrepancy measures](https://arxiv.org/abs/1602.03572): established background for inverse-concentration diagnostics. ESS itself and mixing with uniform weights are not claimed as inventions here.
 
 This is a focused literature check, not proof that no prior work uses the same construction.
+
+
+## Ordinal evidence allocation
+
+CB-Rank separates the ordering of teacher evidence from its amplitude. Let
+`g_t = max(sign(A) * d_t, 0)` and let `S` contain strictly positive evidence on
+valid tokens. For each token in S, assign its ascending average rank `R_t`
+(ties share the mean of their occupied ranks), then set `q_t = R_t / sum_S R`.
+Other tokens receive zero pre-mixing weight. Empty support uses the uniform
+fallback. Apply the existing uniform floor and optional ESS constraint to q.
+
+Any strictly increasing transformation of positive evidence that preserves
+positive support and ties leaves this allocation unchanged, in exact arithmetic.
+This is stronger than scale invariance but deliberately discards amplitude.
+It does not cover transformations that change evidence signs, ties, or verifier
+outcomes; floating-point rounding can also change ties. Signed reward mass and
+the ESS bound are inherited from the shared allocation stage. These are reward
+properties, not claims about unbiased gradients or trained-model accuracy.
+
+`budget-rank` selects `BUDGET_ALLOCATION=rank` and an ESS fraction of 0.25.
+`budget-rank-shuffled` permutes those same weights over valid positions, using
+the existing stable seed rule. `rank-no-ess` in the experiment runner disables
+the ESS constraint but retains the 0.05 uniform floor. Both controls are needed:
+rank and magnitude allocation can have different concentration even under the
+same lower bound. Report measured concentration alongside accuracy.
+
+```bash
+DRY_RUN=1 bash scripts/train.sh budget-rank
+python scripts/run_ablation.py --variants ess rank rank-shuffled rank-no-ess ess-uniform
+```
+
+Ranking adds per-response sorting and a Python loop; it adds no teacher calls
+but is not a runtime-efficiency claim. Profile long responses before large runs.
+Average ranks and rank weighting are established techniques, not claimed as
+inventions. The research hypothesis is whether ordinal evidence, under conserved
+outcome budgets and matched concentration controls, transfers more robustly
+than magnitude evidence. Related token-selection work includes
+[TA-OPD](https://arxiv.org/abs/2605.26844); distinguish its teachability selection
+from this ordinal allocation and compare experimentally before novelty claims.

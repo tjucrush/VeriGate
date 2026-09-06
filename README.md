@@ -84,6 +84,34 @@ This optional mechanism has numerical tests and configurable ablations; its effe
 
 <br>
 
+
+### Ordinal evidence allocation
+
+**CB-Rank** asks whether teacher ordering is more useful than raw score magnitude. Positive, outcome-aligned evidence receives average-rank weights; ties stay tied, absent evidence falls back to uniform allocation, and the ESS constraint controls concentration.
+
+<img src="docs/assets/ordinal-allocation.png" alt="CB-Rank pipeline: verify the outcome, rank positive evidence, and regulate concentration. Monotone changes in positive evidence preserve its rank allocation." width="100%">
+
+<table>
+<tr><th>💎 Budget</th><th>🧭 Ordering</th><th>⚖️ Concentration</th></tr>
+<tr><td>Preserve signed reward mass</td><td>Ignore magnitude changes that preserve ranks</td><td>Apply the same ESS floor</td></tr>
+</table>
+
+```bash
+# Preview only — no training starts.
+DRY_RUN=1 bash scripts/train.sh budget-rank
+python scripts/run_ablation.py --variants ess rank rank-shuffled rank-no-ess ess-uniform
+```
+
+<details>
+<summary><strong>🔬 What would support this research hypothesis?</strong></summary>
+
+Compare rank allocation with magnitude allocation, shuffled ranks, and uniform allocation using matched budgets, teacher calls, seeds, and separately tuned learning rates. Measure accuracy, reward concentration, teacher calibration sensitivity, and runtime. Rank sorting adds overhead and discards potentially useful magnitude information. No accuracy improvement is claimed yet.
+
+[Read the formula and controls →](docs/CONSERVED_BUDGET.md#ordinal-evidence-allocation)
+
+</details>
+
+
 ## Method
 
 **The core pipeline** · student-generated trajectories, teacher scores, and verifiable feedback.
@@ -192,8 +220,10 @@ The launcher uses your active environment and lets the trainer initialize Ray. L
 | Uniform control | `bash scripts/train.sh budget-uniform` | Equal weight per valid token |
 | Shuffled control | `bash scripts/train.sh budget-shuffled` | Seeded permutation of teacher weights |
 | **CB-ESS** | `bash scripts/train.sh budget-ess` | Teacher-directed with adaptive concentration constraint |
+| **CB-Rank** | `bash scripts/train.sh budget-rank` | Average-rank evidence with the same ESS floor |
+| **CB-Rank shuffled** | `bash scripts/train.sh budget-rank-shuffled` | Permuted rank allocation control |
 
-All four use the same response-budget rule and sequence-mean/token-sum aggregation. See the [research design](docs/CONSERVED_BUDGET.md) for limitations and matched comparisons.
+These variants use the same response-budget rule and sequence-mean/token-sum aggregation. See the [research design](docs/CONSERVED_BUDGET.md) for limitations and matched comparisons.
 
 Explicit environment variables override preset defaults. The group preset defaults to `GRPO_NORM_BY_STD=True`; use `False` for centered advantages without standard-deviation normalization.
 

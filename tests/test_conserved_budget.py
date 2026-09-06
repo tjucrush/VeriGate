@@ -25,6 +25,34 @@ class ConservedBudgetTests(unittest.TestCase):
     def run_case(self, **options):
         return compute(self.teacher, self.scores, self.mask, self.groups, **options)
 
+    def test_rank_ties_and_zero_support(self):
+        teacher = torch.tensor([[1., 1., 8., 0., -3.], [0., 0., 0., 0., 0.]])
+        result, _ = compute(teacher, torch.ones(2), torch.ones_like(teacher), ["a", "b"],
+                            allocation="rank", uniform_mix=0)
+        torch.testing.assert_close(result[0], torch.tensor([.125, .125, .25, 0., 0.]))
+        torch.testing.assert_close(result[1], torch.full((5,), .1))
+
+    def test_rank_monotonic_transform_invariance(self):
+        expected, _ = self.run_case(allocation="rank", min_effective_fraction=.75)
+        transformed = self.teacher.sign() * self.teacher.abs().pow(3)
+        actual, _ = compute(transformed, self.scores, self.mask, self.groups,
+                            allocation="rank", min_effective_fraction=.75)
+        torch.testing.assert_close(actual, expected)
+
+    def test_rank_shuffle_and_budget(self):
+        expected, _ = self.run_case(allocation="rank", min_effective_fraction=.9)
+        actual, metrics = self.run_case(allocation="rank-shuffled", min_effective_fraction=.9)
+        torch.testing.assert_close(actual.sort(-1).values, expected.sort(-1).values)
+        torch.testing.assert_close(actual.sum(-1), torch.tensor([.75, -.75], dtype=torch.float64))
+        self.assertGreaterEqual(metrics["cb/effective_token_fraction"], .9 - 1e-12)
+        self.assertTrue(torch.equal(actual[:, -1], torch.zeros(2, dtype=torch.float64)))
+
+    def test_rank_masked_nonfinite_and_empty(self):
+        teacher = torch.tensor([[3., float("nan"), 1.], [float("nan"), 0., 0.]])
+        mask = torch.tensor([[1, 0, 1], [0, 0, 0]])
+        result, _ = compute(teacher, torch.ones(2), mask, ["a", "a"], allocation="rank", uniform_mix=0)
+        torch.testing.assert_close(result, torch.tensor([[1/3, 0., 1/6], [0., 0., 0.]]))
+
     def test_exact_example_and_signs(self):
         rewards, metrics = self.run_case(uniform_mix=0)
         torch.testing.assert_close(rewards, torch.tensor([[.5, 0., .25, 0.], [-.3, 0., -.45, 0.]], dtype=torch.float64))

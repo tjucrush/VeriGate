@@ -9,7 +9,7 @@ METHOD="${1:-verigate}"
 if [[ $# -gt 0 ]]; then shift; fi
 case "$METHOD" in
     verigate) ;;
-    budget|budget-uniform|budget-shuffled|budget-ess)
+    budget|budget-uniform|budget-shuffled|budget-ess|budget-rank|budget-rank-shuffled)
         export BUDGETED_DISTILLATION="${BUDGETED_DISTILLATION:-True}"
         export N_RESPONSES="${N_RESPONSES:-8}"
         export LOSS_AGG_MODE="${LOSS_AGG_MODE:-seq-mean-token-sum}"
@@ -17,6 +17,9 @@ case "$METHOD" in
             export BUDGET_ALLOCATION="${BUDGET_ALLOCATION:-uniform}"
         elif [[ "$METHOD" == budget-shuffled ]]; then
             export BUDGET_ALLOCATION="${BUDGET_ALLOCATION:-shuffled}"
+        elif [[ "$METHOD" == budget-rank || "$METHOD" == budget-rank-shuffled ]]; then
+            export BUDGET_ALLOCATION="${BUDGET_ALLOCATION:-${METHOD#budget-}}"
+            export BUDGET_MIN_EFFECTIVE_FRACTION="${BUDGET_MIN_EFFECTIVE_FRACTION:-0.25}"
         elif [[ "$METHOD" == budget-ess ]]; then
             export BUDGET_MIN_EFFECTIVE_FRACTION="${BUDGET_MIN_EFFECTIVE_FRACTION:-0.25}"
         fi
@@ -28,7 +31,7 @@ case "$METHOD" in
         ;;
     baseline) export CORRECTNESS_GATED="${CORRECTNESS_GATED:-False}" ;;
     inverse) export CORRECTNESS_GATED_MODE="${CORRECTNESS_GATED_MODE:-inverse}" ;;
-    *) printf 'Unknown method: %s. Use verigate, group, baseline, inverse, budget, budget-uniform, budget-shuffled, or budget-ess.\n' "$METHOD" >&2; exit 2 ;;
+    *) printf 'Unknown method: %s. Use verigate, group, baseline, inverse, budget, budget-uniform, budget-shuffled, budget-ess, budget-rank, or budget-rank-shuffled.\n' "$METHOD" >&2; exit 2 ;;
 esac
 
 export HYDRA_FULL_ERROR=1
@@ -122,7 +125,7 @@ if [[ "$BUDGETED_DISTILLATION" == True ]]; then
     if [[ "$LOSS_AGG_MODE" != seq-mean-token-sum ]]; then
         echo 'Conserved budgets require LOSS_AGG_MODE=seq-mean-token-sum.' >&2; exit 2
     fi
-    case "$BUDGET_ALLOCATION" in teacher|uniform|shuffled) ;; *) echo 'Invalid BUDGET_ALLOCATION.' >&2; exit 2 ;; esac
+    case "$BUDGET_ALLOCATION" in teacher|uniform|shuffled|rank|rank-shuffled) ;; *) echo 'Invalid BUDGET_ALLOCATION.' >&2; exit 2 ;; esac
     case "$BUDGET_MODE" in loo|fixed) ;; *) echo 'Invalid BUDGET_MODE.' >&2; exit 2 ;; esac
     if [[ ! "$BUDGET_SEED" =~ ^[0-9]+$ ]]; then echo 'BUDGET_SEED must be a non-negative integer.' >&2; exit 2; fi
 fi

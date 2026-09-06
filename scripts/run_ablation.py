@@ -21,6 +21,10 @@ VARIANTS = {
     "no-prior": ("budget", {"BUDGET_PRIOR_STRENGTH": "0"}),
     "no-floor": ("budget", {"BUDGET_UNIFORM_MIX": "0"}),
     "fixed-budget": ("budget", {"BUDGET_MODE": "fixed"}),
+    "rank": ("budget-rank", {"BUDGET_ALLOCATION": "rank", "BUDGET_MIN_EFFECTIVE_FRACTION": "0.25"}),
+    "rank-shuffled": ("budget-rank-shuffled", {
+        "BUDGET_ALLOCATION": "rank-shuffled", "BUDGET_MIN_EFFECTIVE_FRACTION": "0.25"}),
+    "rank-no-ess": ("budget-rank", {"BUDGET_ALLOCATION": "rank"}),
     "ess": ("budget-ess", {"BUDGET_MIN_EFFECTIVE_FRACTION": "0.25"}),
     "ess-shuffled": ("budget-shuffled", {"BUDGET_MIN_EFFECTIVE_FRACTION": "0.25"}),
     "ess-uniform": ("budget-uniform", {"BUDGET_MIN_EFFECTIVE_FRACTION": "0.25"}),
