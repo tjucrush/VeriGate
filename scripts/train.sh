@@ -9,7 +9,7 @@ METHOD="${1:-verigate}"
 if [[ $# -gt 0 ]]; then shift; fi
 case "$METHOD" in
     verigate) ;;
-    budget|budget-uniform|budget-shuffled)
+    budget|budget-uniform|budget-shuffled|budget-ess)
         export BUDGETED_DISTILLATION="${BUDGETED_DISTILLATION:-True}"
         export N_RESPONSES="${N_RESPONSES:-8}"
         export LOSS_AGG_MODE="${LOSS_AGG_MODE:-seq-mean-token-sum}"
@@ -17,6 +17,8 @@ case "$METHOD" in
             export BUDGET_ALLOCATION="${BUDGET_ALLOCATION:-uniform}"
         elif [[ "$METHOD" == budget-shuffled ]]; then
             export BUDGET_ALLOCATION="${BUDGET_ALLOCATION:-shuffled}"
+        elif [[ "$METHOD" == budget-ess ]]; then
+            export BUDGET_MIN_EFFECTIVE_FRACTION="${BUDGET_MIN_EFFECTIVE_FRACTION:-0.25}"
         fi
         ;;
     group)
@@ -26,7 +28,7 @@ case "$METHOD" in
         ;;
     baseline) export CORRECTNESS_GATED="${CORRECTNESS_GATED:-False}" ;;
     inverse) export CORRECTNESS_GATED_MODE="${CORRECTNESS_GATED_MODE:-inverse}" ;;
-    *) printf 'Unknown method: %s. Use verigate, group, baseline, inverse, budget, budget-uniform, or budget-shuffled.\n' "$METHOD" >&2; exit 2 ;;
+    *) printf 'Unknown method: %s. Use verigate, group, baseline, inverse, budget, budget-uniform, budget-shuffled, or budget-ess.\n' "$METHOD" >&2; exit 2 ;;
 esac
 
 export HYDRA_FULL_ERROR=1
@@ -66,6 +68,7 @@ export BUDGET_UNIFORM_MIX=${BUDGET_UNIFORM_MIX:-0.05}
 export BUDGET_ALLOCATION=${BUDGET_ALLOCATION:-teacher}
 export BUDGET_MODE=${BUDGET_MODE:-loo}
 export BUDGET_SEED=${BUDGET_SEED:-0}
+export BUDGET_MIN_EFFECTIVE_FRACTION=${BUDGET_MIN_EFFECTIVE_FRACTION:-0.0}
 export LOSS_AGG_MODE=${LOSS_AGG_MODE:-token-mean}
 
 # ---- shared hypers ----
@@ -193,6 +196,7 @@ COMMAND=("${PYTHON:-python3}" -m verl.trainer.main_ppo \
     +actor_rollout_ref.rollout.budget_allocation="$BUDGET_ALLOCATION" \
     +actor_rollout_ref.rollout.budget_mode="$BUDGET_MODE" \
     +actor_rollout_ref.rollout.budget_seed="$BUDGET_SEED" \
+    +actor_rollout_ref.rollout.budget_min_effective_fraction="$BUDGET_MIN_EFFECTIVE_FRACTION" \
     actor_rollout_ref.rollout.tensor_model_parallel_size="$PARALLEL_SIZE" \
     actor_rollout_ref.rollout.gpu_memory_utilization=0.5 \
     actor_rollout_ref.rollout.max_model_len=$((MAX_PROMPT_LENGTH + MAX_RESP_LENGTH)) \

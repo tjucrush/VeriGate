@@ -84,6 +84,15 @@ class LauncherTests(unittest.TestCase):
             self.assertIn("loss_agg_mode=seq-mean-token-sum", result.stdout)
             self.assertIn("rollout.n=8", result.stdout)
 
+    def test_concentration_preset_and_override(self):
+        result = self.run_launcher("budget-ess")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("budget_min_effective_fraction=0.25", result.stdout)
+        overridden = self.run_launcher("budget-ess", {"BUDGET_MIN_EFFECTIVE_FRACTION": "0.5"})
+        self.assertIn("budget_min_effective_fraction=0.5", overridden.stdout)
+        baseline = self.run_launcher("budget")
+        self.assertIn("budget_min_effective_fraction=0.0", baseline.stdout)
+
     def test_incompatible_budget_options(self):
         for overrides in [{"LOG_PROB_TOP_K": "64"}, {"GRPO_SCALED": "True"},
                           {"CORRECTNESS_GATED": "False"}, {"CORRECTNESS_GATED_MODE": "inverse"},

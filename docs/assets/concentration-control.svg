@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="570" viewBox="0 0 1280 570" role="img">
+<rect x="0" y="0" width="1280" height="570" rx="0" fill="#101b30"/>
+<text x="48" y="41" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#77e1ce">RESEARCH SPOTLIGHT  /  CB-ESS</text>
+<text x="48" y="103" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="38" font-weight="700" fill="#ffffff">Keep the budget. Control the concentration.</text>
+<text x="48" y="141" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="20" font-weight="400" fill="#a9bdd8">Adaptive mixing spreads concentrated teacher evidence across valid tokens.</text>
+<rect x="48" y="179" width="570" height="299" rx="20" fill="#18283f" stroke="#31455f"/>
+<text x="74" y="216" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="18" font-weight="700" fill="#ac94f5">FIXED UNIFORM FLOOR</text>
+<text x="74" y="255" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="24" font-weight="700" fill="#ffffff">Effective tokens: 1.10 / 16</text>
+<rect x="78" y="289.5625" width="21" height="133.4375" rx="4" fill="#ac94f5"/>
+<rect x="110" y="421" width="21" height="2" rx="4" fill="#ac94f5"/>
+<rect x="142" y="421" width="21" height="2" rx="4" fill="#ac94f5"/>
+<rect x="174" y="421" width="21" height="2" rx="4" fill="#ac94f5"/>
+<rect x="206" y="421" width="21" height="2" rx="4" fill="#ac94f5"/>
+<rect x="238" y="421" width="21" height="2" rx="4" fill="#ac94f5"/>
+<rect x="270" y="421" width="21" height="2" rx="4" fill="#ac94f5"/>
+<rect x="302" y="421" width="21" height="2" rx="4" fill="#ac94f5"/>
+<rect x="334" y="421" width="21" height="2" rx="4" fill="#ac94f5"/>
+<rect x="366" y="421" width="21" height="2" rx="4" fill="#ac94f5"/>
+<rect x="398" y="421" width="21" height="2" rx="4" fill="#ac94f5"/>
+<rect x="430" y="421" width="21" height="2" rx="4" fill="#ac94f5"/>
+<rect x="462" y="421" width="21" height="2" rx="4" fill="#ac94f5"/>
+<rect x="494" y="421" width="21" height="2" rx="4" fill="#ac94f5"/>
+<rect x="526" y="421" width="21" height="2" rx="4" fill="#ac94f5"/>
+<rect x="558" y="421" width="21" height="2" rx="4" fill="#ac94f5"/>
+<polyline points="75,426 588,426" fill="none" stroke="#526781" stroke-width="1" stroke-linejoin="round"/>
+<text x="75" y="456" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="400" fill="#bccde2">Same signed reward budget: +0.50</text>
+<rect x="662" y="179" width="570" height="299" rx="20" fill="#18283f" stroke="#31455f"/>
+<text x="688" y="216" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="18" font-weight="700" fill="#70dec5">ADAPTIVE CB-ESS</text>
+<text x="688" y="255" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="24" font-weight="700" fill="#ffffff">Effective tokens: 4.00 / 16</text>
+<rect x="692" y="355.55321559063054" width="21" height="67.44678440936947" rx="4" fill="#70dec5"/>
+<rect x="724" y="418.1631189606246" width="21" height="4.836881039375369" rx="4" fill="#70dec5"/>
+<rect x="756" y="418.1631189606246" width="21" height="4.836881039375369" rx="4" fill="#70dec5"/>
+<rect x="788" y="418.1631189606246" width="21" height="4.836881039375369" rx="4" fill="#70dec5"/>
+<rect x="820" y="418.1631189606246" width="21" height="4.836881039375369" rx="4" fill="#70dec5"/>
+<rect x="852" y="418.1631189606246" width="21" height="4.836881039375369" rx="4" fill="#70dec5"/>
+<rect x="884" y="418.1631189606246" width="21" height="4.836881039375369" rx="4" fill="#70dec5"/>
+<rect x="916" y="418.1631189606246" width="21" height="4.836881039375369" rx="4" fill="#70dec5"/>
+<rect x="948" y="418.1631189606246" width="21" height="4.836881039375369" rx="4" fill="#70dec5"/>
+<rect x="980" y="418.1631189606246" width="21" height="4.836881039375369" rx="4" fill="#70dec5"/>
+<rect x="1012" y="418.1631189606246" width="21" height="4.836881039375369" rx="4" fill="#70dec5"/>
+<rect x="1044" y="418.1631189606246" width="21" height="4.836881039375369" rx="4" fill="#70dec5"/>
+<rect x="1076" y="418.1631189606246" width="21" height="4.836881039375369" rx="4" fill="#70dec5"/>
+<rect x="1108" y="418.1631189606246" width="21" height="4.836881039375369" rx="4" fill="#70dec5"/>
+<rect x="1140" y="418.1631189606246" width="21" height="4.836881039375369" rx="4" fill="#70dec5"/>
+<rect x="1172" y="418.1631189606246" width="21" height="4.836881039375369" rx="4" fill="#70dec5"/>
+<polyline points="689,426 1202,426" fill="none" stroke="#526781" stroke-width="1" stroke-linejoin="round"/>
+<text x="689" y="456" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="400" fill="#bccde2">Same signed reward budget: +0.50</text>
+<text x="48" y="523" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#b5c7df">Synthetic 16-token example  |  One-hot teacher evidence  |  Target effective fraction: 25%</text>
+<text x="48" y="551" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="15" font-weight="400" fill="#8da5c5">Allocation illustration only. No training results or gradient-concentration guarantee.</text>
+</svg>

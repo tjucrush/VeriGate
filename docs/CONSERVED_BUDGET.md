@@ -28,6 +28,43 @@ For nonempty responses, $\sum_t r_{it}=A_i$ and $\sum_t|r_{it}|=|A_i|\le1$. Posi
 
 These are **reward-mass properties**, not guarantees of invariant parameter gradients, convergence, or unbiased policy gradients. The action-dependent allocation changes the surrogate objective. Teacher-temperature changes need not be simple positive rescalings of $d$.
 
+## Adaptive concentration control
+
+**CB-ESS** addresses a limitation of conservation: an extreme teacher score can still absorb nearly all reward mass. A fixed 5% uniform floor can leave approximately 95% on a single position in a long response.
+
+For weights over $L$ valid tokens, constrain the effective-token fraction:
+
+$$f(w)=\frac{1}{L\sum_t w_t^2}\ge\kappa.$$
+
+This is an inverse-concentration measure, not a count of independent samples, a minimum number of updated tokens, or a bound on parameter-gradient concentration.
+
+Starting from allocation $q$ and uniform weights $u$, choose the smallest mixture $\lambda\ge\rho$ along $w=(1-\lambda)q+\lambda u$. Because
+
+$$\sum_t w_t^2=\frac1L+(1-\lambda)^2\lVert q-u\rVert_2^2,$$
+
+the additional mixture needed for nonuniform $q$ is
+
+$$\lambda_* = \max\left(0,1-\sqrt{\frac{1-\kappa}{\kappa L\lVert q-u\rVert_2^2}}\right),\qquad\lambda=\max(\rho,\lambda_*).$$
+
+Uniform rows require no extra mixture. Empty rows stay zero. Setting $\kappa=0$ disables the constraint; $\kappa=1$ yields uniform allocation. Centered squares avoid cancellation near uniform weights. Applying the controller after the shuffled allocation control preserves the matched concentration distribution.
+
+![Synthetic concentration-control example](assets/concentration-control.png)
+
+The figure uses a synthetic 16-token response with one nonzero teacher-evidence value. It illustrates numerical allocation behavior, not training performance. The controller needs additional tensor reductions but no extra model calls; runtime overhead has not been benchmarked.
+
+```bash
+DRY_RUN=1 bash scripts/train.sh budget-ess
+bash scripts/train.sh budget-ess
+BUDGET_MIN_EFFECTIVE_FRACTION=0.5 bash scripts/train.sh budget-ess
+
+# Prints a plan only; training requires --execute.
+python scripts/run_ablation.py --variants budget ess ess-low ess-high ess-shuffled ess-uniform fixed-mix-25 fixed-mix-50
+```
+
+The preset uses $\kappa=0.25$ as a starting point, not a tuned optimum. Sweep the constraint and compare against tuned fixed uniform mixtures. Spreading rewards may hurt tasks with sparse decisive tokens; test this rather than assuming larger effective fractions are better.
+
+Metrics `cb/uniform_mix_mean` and `cb/concentration_limited_fraction` report the mixture and the frequency of adaptation beyond the fixed floor. Numerical tests cover the per-response bound, analytic minimality, sparse masks, long sequences, extreme scores, and disabled-mode equivalence. No trained-model accuracy gain has been established.
+
 ## Training interface
 
 ```bash
@@ -49,6 +86,7 @@ Only sampled-token rewards (`LOG_PROB_TOP_K=0`) are supported. Use `seq-mean-tok
 | `BUDGET_ALLOCATION` | `teacher` | `teacher`, `uniform`, or seeded `shuffled` |
 | `BUDGET_MODE` | `loo` | Leave-one-out or `fixed` response budget |
 | `BUDGET_SEED` | `0` | Reproducible within-response permutation |
+| `BUDGET_MIN_EFFECTIVE_FRACTION` | `0.0`; `0.25` in `budget-ess` | Minimum inverse-concentration fraction; zero disables |
 
 The uniform control still computes teacher scores, so it is a compute-matched allocation control, not a teacher-free efficiency claim. Shuffling preserves the allocation histogram while moving weights to different valid positions. The permutation is stable for a given seed, prompt ID, and response length; padding positions are excluded.
 
@@ -90,5 +128,7 @@ CPU tests cover scalar-reference budgets, permutation and padding behavior, empt
 - [Group-Calibrated OPD](https://arxiv.org/abs/2608.19181): calibration using grouped teacher and task signals.
 - [Global normalization for OPD](https://arxiv.org/abs/2606.09091): a normalization-related comparison to investigate.
 - [Does On-Policy Distillation Really Distill?](https://arxiv.org/abs/2608.31046): challenges teacher-dependent explanations; motivates strong allocation controls.
+
+- [Effective Sample Size for Importance Sampling based on discrepancy measures](https://arxiv.org/abs/1602.03572): established background for inverse-concentration diagnostics. ESS itself and mixing with uniform weights are not claimed as inventions here.
 
 This is a focused literature check, not proof that no prior work uses the same construction.

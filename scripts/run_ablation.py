@@ -21,6 +21,13 @@ VARIANTS = {
     "no-prior": ("budget", {"BUDGET_PRIOR_STRENGTH": "0"}),
     "no-floor": ("budget", {"BUDGET_UNIFORM_MIX": "0"}),
     "fixed-budget": ("budget", {"BUDGET_MODE": "fixed"}),
+    "ess": ("budget-ess", {"BUDGET_MIN_EFFECTIVE_FRACTION": "0.25"}),
+    "ess-shuffled": ("budget-shuffled", {"BUDGET_MIN_EFFECTIVE_FRACTION": "0.25"}),
+    "ess-uniform": ("budget-uniform", {"BUDGET_MIN_EFFECTIVE_FRACTION": "0.25"}),
+    "ess-low": ("budget-ess", {"BUDGET_MIN_EFFECTIVE_FRACTION": "0.1"}),
+    "ess-high": ("budget-ess", {"BUDGET_MIN_EFFECTIVE_FRACTION": "0.5"}),
+    "fixed-mix-25": ("budget", {"BUDGET_UNIFORM_MIX": "0.25"}),
+    "fixed-mix-50": ("budget", {"BUDGET_UNIFORM_MIX": "0.5"}),
 }
 
 
@@ -43,6 +50,7 @@ def make_plan(variants, seeds, learning_rates, steps):
                         "shuffled" if method == "budget-shuffled" else "teacher"
                     ),
                     "BUDGET_MODE": "loo", "BUDGET_PRIOR_STRENGTH": "0.5", "BUDGET_UNIFORM_MIX": "0.05",
+                    "BUDGET_MIN_EFFECTIVE_FRACTION": "0.0",
                     "CORRECTNESS_GATED": "False" if method == "baseline" else "True",
                     "CORRECTNESS_GATED_MODE": "default", "GRPO_SCALED": "True" if method == "group" else "False",
                     "GRPO_NORM_BY_STD": "True", "GRPO_SCALE_BASELINE": "0", "LOG_PROB_TOP_K": "0",

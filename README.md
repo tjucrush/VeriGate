@@ -70,6 +70,18 @@ python scripts/run_ablation.py --output outputs/ablation-plan.json
 
 <p align="center"><a href="docs/CONSERVED_BUDGET.md"><strong>Explore the mechanism, controls, and research plan →</strong></a></p>
 
+### Adaptive concentration control
+
+**CB-ESS** prevents an extreme teacher score from absorbing almost all the reward budget. It analytically increases uniform mixing only when needed to meet a chosen effective-token fraction, while preserving signed reward mass.
+
+<img src="docs/assets/concentration-control.png" alt="Synthetic 16-token example: adaptive mixing reduces concentration while preserving the response budget. This is not a benchmark result." width="100%">
+
+```bash
+DRY_RUN=1 bash scripts/train.sh budget-ess
+```
+
+This optional mechanism has numerical tests and configurable ablations; its effect on trained-model accuracy remains untested. [Formula and experiment design →](docs/CONSERVED_BUDGET.md#adaptive-concentration-control)
+
 <br>
 
 ## Method
@@ -179,8 +191,9 @@ The launcher uses your active environment and lets the trainer initialize Ray. L
 | **VeriGate-CB** | `bash budget.sh` | Teacher-directed |
 | Uniform control | `bash scripts/train.sh budget-uniform` | Equal weight per valid token |
 | Shuffled control | `bash scripts/train.sh budget-shuffled` | Seeded permutation of teacher weights |
+| **CB-ESS** | `bash scripts/train.sh budget-ess` | Teacher-directed with adaptive concentration constraint |
 
-All three use the same response-budget rule and sequence-mean/token-sum aggregation. See the [research design](docs/CONSERVED_BUDGET.md) for limitations and matched comparisons.
+All four use the same response-budget rule and sequence-mean/token-sum aggregation. See the [research design](docs/CONSERVED_BUDGET.md) for limitations and matched comparisons.
 
 Explicit environment variables override preset defaults. The group preset defaults to `GRPO_NORM_BY_STD=True`; use `False` for centered advantages without standard-deviation normalization.
 

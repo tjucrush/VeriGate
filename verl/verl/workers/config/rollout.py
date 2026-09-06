@@ -176,6 +176,7 @@ class RolloutConfig(BaseConfig):
     budget_allocation: str = "teacher"
     budget_mode: str = "loo"
     budget_seed: int = 0
+    budget_min_effective_fraction: float = 0.0  # Zero disables adaptive concentration control.
 
     disable_log_stats: bool = True
 

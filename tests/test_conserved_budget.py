@@ -159,6 +159,73 @@ class ConservedBudgetTests(unittest.TestCase):
             torch.testing.assert_close(output.abs().sum(-1), target.abs())
             self.assertTrue((output.abs().sum(-1) <= 1).all())
 
+    def test_concentration_limit_has_minimal_analytic_mixture(self):
+        teacher = torch.zeros(1, 16, dtype=torch.float64)
+        teacher[0, 0] = 1000
+        result, metrics = compute(teacher, torch.ones(1), torch.ones_like(teacher), ["x"],
+                                  uniform_mix=0, min_effective_fraction=.25)
+        weights = result[0] / .5
+        expected_mix = 1 - (3 / 15) ** .5
+        self.assertAlmostEqual(metrics["cb/uniform_mix_mean"], expected_mix, places=12)
+        self.assertAlmostEqual(1 / (16 * weights.square().sum().item()), .25, places=12)
+        self.assertAlmostEqual(result.sum().item(), .5, places=12)
+        self.assertEqual(metrics["cb/concentration_limited_fraction"], 1)
+        smaller = expected_mix - 1e-5
+        candidate = torch.full((16,), smaller / 16, dtype=torch.float64)
+        candidate[0] += 1 - smaller
+        self.assertLess(1 / (16 * candidate.square().sum().item()), .25)
+
+    def test_concentration_control_leaves_diffuse_rows_unchanged(self):
+        teacher = torch.arange(1., 17., dtype=torch.float64).reshape(1, 16)
+        arguments = (teacher, torch.ones(1), torch.ones_like(teacher), ["x"])
+        baseline, _ = compute(*arguments)
+        bounded, metrics = compute(*arguments, min_effective_fraction=.25)
+        torch.testing.assert_close(baseline, bounded, rtol=0, atol=0)
+        self.assertEqual(metrics["cb/concentration_limited_fraction"], 0)
+
+    def test_concentration_one_recovers_uniform_with_mask_holes(self):
+        bounded, _ = self.run_case(min_effective_fraction=1)
+        uniform, _ = self.run_case(allocation="uniform")
+        torch.testing.assert_close(bounded, uniform)
+        mask = torch.tensor([[1, 0, 1, 0], [0, 1, 1, 0]])
+        bounded, _ = compute(self.teacher, self.scores, mask, self.groups, min_effective_fraction=1)
+        uniform, _ = compute(self.teacher, self.scores, mask, self.groups, allocation="uniform")
+        torch.testing.assert_close(bounded, uniform)
+
+    def test_concentration_control_preserves_scaling_and_shuffle_invariants(self):
+        expected, _ = self.run_case(min_effective_fraction=.9)
+        scaled, _ = compute(self.teacher * 1e20, self.scores, self.mask, self.groups,
+                            min_effective_fraction=.9)
+        shuffled, _ = self.run_case(min_effective_fraction=.9, allocation="shuffled")
+        torch.testing.assert_close(expected, scaled)
+        torch.testing.assert_close(expected.sort().values, shuffled.sort().values)
+
+    def test_concentration_bound_for_random_lengths_and_extreme_scores(self):
+        generator = torch.Generator().manual_seed(123)
+        for dtype in [torch.float32, torch.float64]:
+            for width in [1, 3, 127, 4096]:
+                teacher = torch.randn(4, width, generator=generator, dtype=dtype)
+                teacher[0, 0] = 1e30
+                teacher[1, 0] = -1e30
+                mask = torch.rand(4, width, generator=generator) > .2
+                mask[:3, 0] = True
+                mask[3] = False
+                for target in [.1, .25, .9, 1.]:
+                    result, _ = compute(teacher, torch.tensor([1., 0., 1., 0.]), mask,
+                                        ["a", "a", "b", "b"], min_effective_fraction=target)
+                    weights = result[:3].abs() / result[:3].abs().sum(-1, keepdim=True)
+                    fractions = 1 / (weights.square().sum(-1) * mask[:3].sum(-1))
+                    self.assertTrue((fractions >= target - 2e-6).all())
+                    self.assertEqual(result[3].abs().sum().item(), 0)
+
+    def test_concentration_zero_is_backward_compatible(self):
+        default, _ = self.run_case()
+        disabled, _ = self.run_case(min_effective_fraction=0)
+        torch.testing.assert_close(default, disabled, rtol=0, atol=0)
+        for target in [-.1, 1.1, float("nan"), float("inf")]:
+            with self.assertRaises(ValueError):
+                self.run_case(min_effective_fraction=target)
+
 
 if __name__ == "__main__":
     unittest.main()

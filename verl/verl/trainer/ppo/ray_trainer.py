@@ -342,6 +342,7 @@ class RayPPOTrainer:
                 budget_cfg.get("budget_allocation", "teacher"),
                 budget_cfg.get("budget_mode", "loo"),
                 budget_cfg.get("budget_seed", 0),
+                budget_cfg.get("budget_min_effective_fraction", 0.0),
             )
             if not self.use_rm or budget_cfg.get("log_prob_top_k", 0) != 0:
                 raise ValueError("Conserved budgets require a teacher and LOG_PROB_TOP_K=0")
@@ -1433,6 +1434,7 @@ class RayPPOTrainer:
                                 allocation=rollout_cfg.get("budget_allocation", "teacher"),
                                 budget_mode=rollout_cfg.get("budget_mode", "loo"),
                                 seed=rollout_cfg.get("budget_seed", 0),
+                                min_effective_fraction=rollout_cfg.get("budget_min_effective_fraction", 0.0),
                             )
                             batch.batch["token_level_rewards"] = budget_rewards
                             batch.batch["token_level_scores"] = budget_rewards

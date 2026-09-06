@@ -25,7 +25,7 @@ from collections.abc import Sequence
 import torch
 
 
-def validate_budget_options(prior_strength, uniform_mix, allocation, budget_mode, seed):
+def validate_budget_options(prior_strength, uniform_mix, allocation, budget_mode, seed, min_effective_fraction=0.0):
     """Validate scalar options before training or tensor operations."""
     if not math.isfinite(prior_strength) or prior_strength < 0:
         raise ValueError("budget_prior_strength must be finite and non-negative")
@@ -37,6 +37,8 @@ def validate_budget_options(prior_strength, uniform_mix, allocation, budget_mode
         raise ValueError("budget_mode must be loo or fixed")
     if isinstance(seed, bool) or not isinstance(seed, int) or seed < 0:
         raise ValueError("budget_seed must be a non-negative integer")
+    if not math.isfinite(min_effective_fraction) or not 0 <= min_effective_fraction <= 1:
+        raise ValueError("budget_min_effective_fraction must be finite and in [0, 1]")
 
 
 @torch.no_grad()
@@ -52,6 +54,7 @@ def conserved_budget_rewards(
     allocation: str = "teacher",
     budget_mode: str = "loo",
     seed: int = 0,
+    min_effective_fraction: float = 0.0,
 ) -> tuple[torch.Tensor, dict[str, float]]:
     """Allocate binary-outcome budgets over valid response tokens.
 
@@ -65,8 +68,11 @@ def conserved_budget_rewards(
     sum_t r_it=A_i and sum_t |r_it|=|A_i|, up to floating-point roundoff.
     Output is float32 for low-precision inputs, float64 for float64 inputs.
     Masked non-finite values are ignored; active non-finite inputs fail loudly.
+    A positive min_effective_fraction adaptively raises the uniform mixture so
+    1 / (L * sum_t w_t**2) is at least this fraction on each nonempty response.
+    Zero disables the concentration constraint and preserves the fixed floor.
     """
-    validate_budget_options(prior_strength, uniform_mix, allocation, budget_mode, seed)
+    validate_budget_options(prior_strength, uniform_mix, allocation, budget_mode, seed, min_effective_fraction)
     if not math.isfinite(threshold):
         raise ValueError("correctness threshold must be finite")
     if teacher_rewards.ndim != 2 or teacher_rewards.shape != response_mask.shape:
@@ -139,7 +145,18 @@ def conserved_budget_rewards(
             generator = torch.Generator(device="cpu").manual_seed(local_seed)
             order = torch.randperm(positions.numel(), generator=generator).to(device)
             weights[row, positions] = weights[row, positions[order]]
-    weights = (1 - uniform_mix) * weights + uniform_mix * uniform
+    mixture = torch.full_like(mass, uniform_mix)
+    if min_effective_fraction > 0:
+        # q-u is orthogonal to u on valid tokens. Therefore mixing by lambda
+        # yields sum(w^2)=1/L+(1-lambda)^2*sum((q-u)^2). Solve the requested
+        # concentration bound analytically for the smallest feasible lambda.
+        # Centered squares avoid cancellation for almost-uniform allocations.
+        variance = (weights - uniform).square().sum(-1, keepdim=True)
+        allowed_variance = (1 - min_effective_fraction) / (min_effective_fraction * lengths.to(dtype).clamp_min(1))
+        retention = (allowed_variance / variance.clamp_min(torch.finfo(dtype).tiny)).clamp(max=1).sqrt()
+        required_mixture = torch.where(variance > 0, 1 - retention, 0.0)
+        mixture = torch.maximum(mixture, required_mixture)
+    weights = (1 - mixture) * weights + mixture * uniform
     result = budget.unsqueeze(-1) * weights
     count = active.sum().clamp_min(1)
 
@@ -157,5 +174,7 @@ def conserved_budget_rewards(
         ),
         "cb/active_responses": float(active.sum().item()),
         "cb/group_size_mean": mean_active(counts[index]),
+        "cb/uniform_mix_mean": mean_active(mixture.squeeze(-1)),
+        "cb/concentration_limited_fraction": mean_active((mixture.squeeze(-1) > uniform_mix).to(dtype)),
     }
     return result, metrics
