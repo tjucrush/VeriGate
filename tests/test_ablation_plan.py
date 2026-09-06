@@ -11,7 +11,7 @@ import unittest
 from unittest.mock import patch
 
 SPEC = importlib.util.spec_from_file_location(
-    "run_ablation", Path(__file__).resolve().parents[1] / "scripts/run_ablation.py"
+    "run_ablation", Path(__file__).resolve().parents[1] / "scripts/run_policy_ablation.py"
 )
 MODULE = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(MODULE)

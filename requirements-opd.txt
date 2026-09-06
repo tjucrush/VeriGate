@@ -1,0 +1,6 @@
+# Direct OPD environment; the bundled policy-optimization stack is not needed.
+torch>=2.7,<3
+transformers>=4.51,<5
+pyarrow>=19
+safetensors>=0.5
+# Optional evaluation dependency, installed separately: math-verify

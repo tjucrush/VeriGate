@@ -1,3 +1,5 @@
+> **Archived policy objective.** The public trainer directly minimizes KL and does not use this objective. See [DIRECT_OPD.md](DIRECT_OPD.md). This document is retained to identify earlier experiments accurately.
+
 # GSPO-token: sequence ratios, local guidance
 
 VeriGate uses **GSPO-token** from [Group Sequence Policy Optimization, Section 4.3](https://arxiv.org/html/2507.18071v2). This is an existing optimizer construction; our research concerns conserved verifier budgets and ordinal teacher allocation.

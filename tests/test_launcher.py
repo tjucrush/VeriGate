@@ -30,7 +30,7 @@ class LauncherTests(unittest.TestCase):
             "PATH", "SYSTEMROOT", "WINDIR", "TEMP", "TMP", "HOME", "COMSPEC")}
         env.update(DRY_RUN="1", ACTOR_MODEL_PATH="student", REWARD_MODEL_PATH="teacher")
         env.update(overrides or {})
-        return subprocess.run([BASH, "scripts/train.sh", method, *arguments],
+        return subprocess.run([BASH, "scripts/train_policy_archive.sh", method, *arguments],
                               cwd=str(ROOT), env=env, text=True, capture_output=True)
 
     def test_rank_presets(self):

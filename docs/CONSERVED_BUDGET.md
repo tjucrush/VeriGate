@@ -1,3 +1,5 @@
+> **Archived reward-allocation design.** The public method now uses a unit sum of direct-KL coefficients, without verifier-derived training rewards. See [DIRECT_OPD.md](DIRECT_OPD.md). The formulas below describe the archived experiment only.
+
 # VeriGate-CB · Conserved outcome budgets
 
 **Status: experimental implementation. No model training or benchmark reproduction has been run for this variant.**
