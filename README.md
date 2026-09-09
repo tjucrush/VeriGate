@@ -1,5 +1,8 @@
 <p align="center">
-  <img src="docs/assets/direct-opd-cover.svg" alt="VeriGate — Where to distill. Full-vocabulary KL, ordinal weights, and controlled baselines." width="100%">
+  <picture>
+    <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/verigate-motion.png">
+    <img src="docs/assets/verigate-motion.gif" alt="VeriGate — Learn. Verify. Distill. Animated illustrative supervision signals for VeriOPD and VeriGRPD." width="100%">
+  </picture>
 </p>
 
 <p align="center">
@@ -40,10 +43,37 @@
 
 **VeriGRPD** — Verifier-Guided Group-Relative Policy Distillation.
 
+### How verification shapes supervision
+
+<p align="center">
+  <picture>
+    <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/verifier-motion.png">
+    <img src="docs/assets/verifier-motion.gif" alt="Illustrative verifier gate: correct responses retain positive token signals; incorrect responses retain negative token signals. VeriGRPD adds group-relative scaling." width="100%">
+  </picture>
+</p>
+
+The teacher supplies token-level evidence; the verifier determines which signal directions pass through the gate. **VeriOPD** uses this feedback for distillation, while **VeriGRPD** adds group-relative scaling. The animation illustrates the gate, not measured trajectories or gradient magnitudes.
+
+<details>
+<summary><strong>Prefer a still view? Open the static diagrams</strong></summary>
+
+[Project cover](docs/assets/verigate-motion.png) · [Verifier mechanism](docs/assets/verifier-motion.png)
+
+</details>
+
 <!-- reported-results:start -->
 ## Reported benchmark results
 
 <img src="docs/assets/results-highlight.svg" alt="Reported averages: VeriOPD 49.1 for 4B to 4B, VeriOPD 22.8 for 4B to 1.7B, and VeriGRPD 49.4 for the group-relative study." width="100%">
+
+<details>
+<summary><strong>Compare all four studies visually</strong></summary>
+
+<img src="docs/assets/benchmark-overview.svg" alt="Four horizontal bar charts of reported average scores, using a shared zero-based 0 to 60 percent axis. Exact scores appear in the tables below." width="100%">
+
+Reported averages with a shared axis. Each panel is a separate experimental comparison.
+
+</details>
 
 **Six mathematics benchmarks · Four controlled comparisons**
 

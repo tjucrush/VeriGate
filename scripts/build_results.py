@@ -23,6 +23,7 @@ def main():
     data = json.loads((ROOT/'docs/results/reported-results.json').read_text(encoding='utf-8'))
     parts = ['## Reported benchmark results',
              '<img src="docs/assets/results-highlight.svg" alt="Reported averages: VeriOPD 49.1 for 4B to 4B, VeriOPD 22.8 for 4B to 1.7B, and VeriGRPD 49.4 for the group-relative study." width="100%">',
+             '<details>\n<summary><strong>Compare all four studies visually</strong></summary>\n\n<img src="docs/assets/benchmark-overview.svg" alt="Four horizontal bar charts of reported average scores, using a shared zero-based 0 to 60 percent axis. Exact scores appear in the tables below." width="100%">\n\nReported averages with a shared axis. Each panel is a separate experimental comparison.\n\n</details>',
              '**Six mathematics benchmarks · Four controlled comparisons**',
              'Scores below are transcribed from the supplied experiment records. **Bold** marks the best score among trained student methods within each table, including ties; the initial student and teacher are reference rows. `Avg.` preserves the reported average.',
              '> These records evaluate the verifier-gated method family. They are not benchmark measurements of the current direct-KL ordinal trainer. [Protocol and source notes](docs/RESULTS.md#reporting-notes).']

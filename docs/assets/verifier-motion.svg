@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="368" viewBox="0 0 1280 368" role="img">
+<rect x="0" y="0" width="1280" height="368" rx="0" fill="#0b1220"/>
+<text x="38" y="42" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="700" fill="#65e0c2">VERIFIER-GUIDED DISTILLATION</text>
+<text x="38" y="93" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="31" font-weight="700" fill="#f3f7ff">Teacher evidence, filtered by the outcome.</text>
+<rect x="38" y="125" width="334" height="168" rx="12" fill="#142235" stroke="#2a3b50"/>
+<text x="56" y="165" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="23" font-weight="700" fill="#f3f7ff">Teacher evidence</text>
+<text x="56" y="196" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#a6b6cd">Signed token-level signal</text>
+<rect x="472" y="125" width="334" height="168" rx="12" fill="#142235" stroke="#2a3b50"/>
+<text x="490" y="165" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="23" font-weight="700" fill="#f3f7ff">Verifier gate</text>
+<text x="490" y="196" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#a6b6cd">Filter by response correctness</text>
+<rect x="906" y="125" width="334" height="168" rx="12" fill="#142235" stroke="#2a3b50"/>
+<text x="924" y="165" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="23" font-weight="700" fill="#f3f7ff">Retained signal</text>
+<text x="924" y="196" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#a6b6cd">Guide the policy update</text>
+<rect x="75" y="234" width="18" height="10" rx="4" fill="#65e0c2"/>
+<rect x="941" y="234" width="18" height="10" rx="4" fill="#65e0c2"/>
+<rect x="110" y="234" width="18" height="10" rx="4" fill="#a5a0ff"/>
+<rect x="145" y="234" width="18" height="10" rx="4" fill="#65e0c2"/>
+<rect x="1011" y="234" width="18" height="10" rx="4" fill="#65e0c2"/>
+<rect x="180" y="234" width="18" height="10" rx="4" fill="#a5a0ff"/>
+<rect x="215" y="234" width="18" height="10" rx="4" fill="#65e0c2"/>
+<rect x="1081" y="234" width="18" height="10" rx="4" fill="#65e0c2"/>
+<rect x="250" y="234" width="18" height="10" rx="4" fill="#a5a0ff"/>
+<rect x="285" y="234" width="18" height="10" rx="4" fill="#65e0c2"/>
+<rect x="1151" y="234" width="18" height="10" rx="4" fill="#65e0c2"/>
+<rect x="320" y="234" width="18" height="10" rx="4" fill="#a5a0ff"/>
+<text x="494" y="242" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="700" fill="#65e0c2">Correct → keep positive</text>
+<rect x="75" y="266" width="18" height="10" rx="4" fill="#a5a0ff"/>
+<rect x="941" y="266" width="18" height="10" rx="4" fill="#a5a0ff"/>
+<rect x="110" y="266" width="18" height="10" rx="4" fill="#65e0c2"/>
+<rect x="145" y="266" width="18" height="10" rx="4" fill="#a5a0ff"/>
+<rect x="1011" y="266" width="18" height="10" rx="4" fill="#a5a0ff"/>
+<rect x="180" y="266" width="18" height="10" rx="4" fill="#65e0c2"/>
+<rect x="215" y="266" width="18" height="10" rx="4" fill="#a5a0ff"/>
+<rect x="1081" y="266" width="18" height="10" rx="4" fill="#a5a0ff"/>
+<rect x="250" y="266" width="18" height="10" rx="4" fill="#65e0c2"/>
+<rect x="285" y="266" width="18" height="10" rx="4" fill="#a5a0ff"/>
+<rect x="1151" y="266" width="18" height="10" rx="4" fill="#a5a0ff"/>
+<rect x="320" y="266" width="18" height="10" rx="4" fill="#65e0c2"/>
+<text x="494" y="274" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="700" fill="#a5a0ff">Incorrect → keep negative</text>
+<polyline points="379,228 463,228" fill="none" stroke="#34465f" stroke-width="2" stroke-linejoin="round"/>
+<polygon points="463,228 454.22417438109625,232.79425538604204 454.22417438109625,223.20574461395796" fill="#34465f"/>
+<rect x="379.0" y="223" width="10" height="10" rx="5" fill="#65e0c2"/>
+<polyline points="813,228 897,228" fill="none" stroke="#34465f" stroke-width="2" stroke-linejoin="round"/>
+<polygon points="897,228 888.2241743810963,232.79425538604204 888.2241743810963,223.20574461395796" fill="#34465f"/>
+<rect x="813.0" y="223" width="10" height="10" rx="5" fill="#65e0c2"/>
+<text x="38" y="339" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="400" fill="#a6b6cd">VeriOPD: verifier-guided OPD    /    VeriGRPD: group-relative extension</text>
+<text x="1036" y="338" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#65e0c2">Schematic only</text>
+</svg>

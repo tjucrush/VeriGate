@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="460" viewBox="0 0 1280 460" role="img">
+<rect x="0" y="0" width="1280" height="460" rx="0" fill="#0b1220"/>
+<polyline points="768,0 768,460" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="808,0 808,460" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="848,0 848,460" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="888,0 888,460" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="928,0 928,460" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="968,0 968,460" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1008,0 1008,460" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1048,0 1048,460" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1088,0 1088,460" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1128,0 1128,460" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1168,0 1168,460" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1208,0 1208,460" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1248,0 1248,460" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<text x="54" y="54" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="700" fill="#65e0c2">VERIFIABLE FEEDBACK / ON-POLICY LEARNING</text>
+<text x="48" y="175" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="84" font-weight="700" fill="#f3f7ff">VeriGate</text>
+<text x="54" y="243" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="38" font-weight="700" fill="#f3f7ff">Learn. Verify. Distill.</text>
+<text x="54" y="295" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="26" font-weight="700" fill="#a5a0ff">VeriOPD + VeriGRPD</text>
+<text x="54" y="340" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="21" font-weight="400" fill="#a6b6cd">Teacher guidance meets verifiable feedback.</text>
+<text x="54" y="414" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="14" font-weight="700" fill="#65e0c2">TWO METHODS    /    SIX BENCHMARKS    /    OPEN EXPERIMENT RECORDS</text>
+<rect x="808" y="107" width="370" height="234" rx="18" fill="#142235" stroke="#2a3b50"/>
+<text x="835" y="143" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="700" fill="#65e0c2">SUPERVISION IN MOTION</text>
+<polyline points="839,198 1147,198" fill="none" stroke="#34465f" stroke-width="2" stroke-linejoin="round"/>
+<rect x="839.0" y="193" width="10" height="10" rx="5" fill="#65e0c2"/>
+<rect x="900.2" y="193" width="10" height="10" rx="5" fill="#65e0c2"/>
+<rect x="961.4" y="193" width="10" height="10" rx="5" fill="#65e0c2"/>
+<rect x="1022.6" y="193" width="10" height="10" rx="5" fill="#65e0c2"/>
+<rect x="1083.8" y="193" width="10" height="10" rx="5" fill="#65e0c2"/>
+<polyline points="839,241 1147,241" fill="none" stroke="#34465f" stroke-width="2" stroke-linejoin="round"/>
+<rect x="864.5" y="236" width="10" height="10" rx="5" fill="#a5a0ff"/>
+<rect x="925.7" y="236" width="10" height="10" rx="5" fill="#a5a0ff"/>
+<rect x="986.9" y="236" width="10" height="10" rx="5" fill="#a5a0ff"/>
+<rect x="1048.1" y="236" width="10" height="10" rx="5" fill="#a5a0ff"/>
+<rect x="1109.3" y="236" width="10" height="10" rx="5" fill="#a5a0ff"/>
+<polyline points="839,284 1147,284" fill="none" stroke="#34465f" stroke-width="2" stroke-linejoin="round"/>
+<rect x="890.0" y="279" width="10" height="10" rx="5" fill="#65e0c2"/>
+<rect x="951.2" y="279" width="10" height="10" rx="5" fill="#65e0c2"/>
+<rect x="1012.4" y="279" width="10" height="10" rx="5" fill="#65e0c2"/>
+<rect x="1073.6" y="279" width="10" height="10" rx="5" fill="#65e0c2"/>
+<rect x="1134.8" y="279" width="10" height="10" rx="5" fill="#65e0c2"/>
+<text x="823" y="383" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="400" fill="#a6b6cd">Illustrative signal flow</text>
+</svg>
