@@ -12,7 +12,7 @@ def table(rows):
            '| :-- | --: | --: | --: | --: | --: | --: | --: |']
     for j, row in enumerate(rows):
         name = row['method']
-        if name.startswith('VeriGate'):
+        if name in {'VeriOPD', 'VeriGRPD'}:
             name = '**' + name + '**'
         vals = [f'**{v:.1f}**' if j >= 2 and v == best[i] else f'{v:.1f}' for i, v in enumerate(row['scores'])]
         out.append('| ' + ' | '.join([name] + vals) + ' |')
@@ -22,7 +22,7 @@ def table(rows):
 def main():
     data = json.loads((ROOT/'docs/results/reported-results.json').read_text(encoding='utf-8'))
     parts = ['## Reported benchmark results',
-             '<img src="docs/assets/results-highlight.svg" alt="Reported averages: VeriGate 49.1 for 4B to 4B, VeriGate 22.8 for 4B to 1.7B, and VeriGate-GR 49.4 for the group-relative study." width="100%">',
+             '<img src="docs/assets/results-highlight.svg" alt="Reported averages: VeriOPD 49.1 for 4B to 4B, VeriOPD 22.8 for 4B to 1.7B, and VeriGRPD 49.4 for the group-relative study." width="100%">',
              '**Six mathematics benchmarks · Four controlled comparisons**',
              'Scores below are transcribed from the supplied experiment records. **Bold** marks the best score among trained student methods within each table, including ties; the initial student and teacher are reference rows. `Avg.` preserves the reported average.',
              '> These records evaluate the verifier-gated method family. They are not benchmark measurements of the current direct-KL ordinal trainer. [Protocol and source notes](docs/RESULTS.md#reporting-notes).']
@@ -42,7 +42,7 @@ def main():
 
 ## Method names
 
-**VeriGate — Verifier-Gated On-Policy Distillation** names the verifier-guided token-update method. **VeriGate-GR — Group-Relative Verifier-Gated Distillation** names its group-relative extension. These are presentation names for the supplied experiments; the renaming does not change algorithms or establish equivalence with a different training objective.
+**VeriOPD — Verifier-Guided On-Policy Distillation** names the verifier-guided token-update method. **VeriGRPD — Verifier-Guided Group-Relative Policy Distillation** names its group-relative extension. These are presentation names for the supplied experiments; the renaming does not change algorithms or establish equivalence with a different training objective.
 
 ## Reporting notes
 
@@ -65,7 +65,7 @@ def main():
     f=Figure(1280,360,'#0b1220')
     f.text(44,30,'VERIGATE / EMPIRICAL STUDIES',17,'#65e0c2',True)
     f.text(44,65,'Verification-guided learning, measured.',34,'#f3f7ff',True)
-    for x, label, score, method, delta in [(44,'01 / SAME-SIZE DISTILLATION','49.1','VeriGate · 4B → 4B','+1.3 pp vs. Sampled-Token OPD'),(449,'02 / CROSS-SIZE TRANSFER','22.8','VeriGate · 4B → 1.7B','+1.1 pp vs. Top-64 OPD'),(854,'03 / GROUP-RELATIVE STUDY','49.4','VeriGate-GR · 4B → 4B','+4.6 pp vs. GRPO')]:
+    for x, label, score, method, delta in [(44,'01 / SAME-SIZE DISTILLATION','49.1','VeriOPD · 4B → 4B','+1.3 pp vs. Sampled-Token OPD'),(449,'02 / CROSS-SIZE TRANSFER','22.8','VeriOPD · 4B → 1.7B','+1.1 pp vs. Top-64 OPD'),(854,'03 / GROUP-RELATIVE STUDY','49.4','VeriGRPD · 4B → 4B','+4.6 pp vs. GRPO')]:
         f.rect(x,133,382,176,'#142235',12,'#2a3b50')
         f.text(x+20,148,label,14,'#a6b6cd',True)
         f.text(x+18,176,score,51,'#f3f7ff',True)
@@ -74,6 +74,18 @@ def main():
         f.text(x+20,277,delta,16,'#65e0c2')
     f.text(44,329,'Reported experiment records · Six benchmarks · Separate comparison settings',15,'#a6b6cd')
     f.save('results-highlight')
+    family = Figure(1280, 244, '#0b1220')
+    for x, number, name, subtitle, ingredients, color in [
+        (28, '01', 'VeriOPD', 'VERIFIER-GUIDED ON-POLICY DISTILLATION', 'OPD + verifiable feedback', '#65e0c2'),
+        (654, '02', 'VeriGRPD', 'VERIFIER-GUIDED GROUP-RELATIVE POLICY DISTILLATION', 'GRPO + OPD + verifiable feedback', '#a5a0ff'),
+    ]:
+        family.rect(x, 24, 598, 196, '#142235', 12, '#2a3b50')
+        family.rect(x+24, 49, 4, 26, color, 2)
+        family.text(x+42, 48, 'METHOD ' + number, 15, color, True)
+        family.text(x+24, 82, name, 42, '#f3f7ff', True)
+        family.text(x+24, 144, subtitle, 13, '#a6b6cd', True)
+        family.text(x+24, 177, ingredients, 20, color)
+    family.save('method-family')
     print('Built four tables in README and RESULTS, plus SVG/PNG results artwork.')
 
 

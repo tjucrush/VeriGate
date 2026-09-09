@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="244" viewBox="0 0 1280 244" role="img">
+<rect x="0" y="0" width="1280" height="244" rx="0" fill="#0b1220"/>
+<rect x="28" y="24" width="598" height="196" rx="12" fill="#142235" stroke="#2a3b50"/>
+<rect x="52" y="49" width="4" height="26" rx="2" fill="#65e0c2"/>
+<text x="70" y="63" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#65e0c2">METHOD 01</text>
+<text x="52" y="124" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="42" font-weight="700" fill="#f3f7ff">VeriOPD</text>
+<text x="52" y="157" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="13" font-weight="700" fill="#a6b6cd">VERIFIER-GUIDED ON-POLICY DISTILLATION</text>
+<text x="52" y="197" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="20" font-weight="400" fill="#65e0c2">OPD + verifiable feedback</text>
+<rect x="654" y="24" width="598" height="196" rx="12" fill="#142235" stroke="#2a3b50"/>
+<rect x="678" y="49" width="4" height="26" rx="2" fill="#a5a0ff"/>
+<text x="696" y="63" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#a5a0ff">METHOD 02</text>
+<text x="678" y="124" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="42" font-weight="700" fill="#f3f7ff">VeriGRPD</text>
+<text x="678" y="157" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="13" font-weight="700" fill="#a6b6cd">VERIFIER-GUIDED GROUP-RELATIVE POLICY DISTILLATION</text>
+<text x="678" y="197" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="20" font-weight="400" fill="#a5a0ff">GRPO + OPD + verifiable feedback</text>
+</svg>

@@ -3,12 +3,14 @@
 </p>
 
 <p align="center">
-  <strong>Direct on-policy distillation with ordinal supervision allocation.</strong>
+  <strong>VeriOPD &amp; VeriGRPD</strong><br>
+  <sub>On-policy distillation, guided by verifiable feedback.</sub>
 </p>
 
 <p align="center">
+  <a href="#method-family">Methods</a> ·
   <a href="#reported-benchmark-results">Results</a> ·
-  <a href="#the-method">Method</a> ·
+  <a href="#the-method">Direct OPD</a> ·
   <a href="#quick-start">Quick start</a> ·
   <a href="#controlled-experiments">Experiments</a> ·
   <a href="#evaluation">Evaluation</a> ·
@@ -30,10 +32,18 @@
 | :-- | :-- | :-- |
 | Refresh student prefixes at every optimizer update. | Compare rank, magnitude, and uniform weights at the same coefficient sum. | Optimize direct KL; retain evaluation evidence and verify answers offline. |
 
+## Method family
+
+<img src="docs/assets/method-family.svg" alt="VeriOPD: Verifier-Guided On-Policy Distillation, combining OPD and verifiable feedback. VeriGRPD: Verifier-Guided Group-Relative Policy Distillation, combining GRPO, OPD, and verifiable feedback." width="100%">
+
+**VeriOPD** — Verifier-Guided On-Policy Distillation.
+
+**VeriGRPD** — Verifier-Guided Group-Relative Policy Distillation.
+
 <!-- reported-results:start -->
 ## Reported benchmark results
 
-<img src="docs/assets/results-highlight.svg" alt="Reported averages: VeriGate 49.1 for 4B to 4B, VeriGate 22.8 for 4B to 1.7B, and VeriGate-GR 49.4 for the group-relative study." width="100%">
+<img src="docs/assets/results-highlight.svg" alt="Reported averages: VeriOPD 49.1 for 4B to 4B, VeriOPD 22.8 for 4B to 1.7B, and VeriGRPD 49.4 for the group-relative study." width="100%">
 
 **Six mathematics benchmarks · Four controlled comparisons**
 
@@ -51,9 +61,9 @@ Scores below are transcribed from the supplied experiment records. **Bold** mark
 | Teacher | 36.0 | 29.0 | 65.9 | 87.0 | 35.4 | 49.3 | 50.4 |
 | Sampled-Token OPD | 34.2 | 26.0 | 63.1 | **85.5** | 31.6 | 46.5 | 47.8 |
 | Top-64 OPD | 34.6 | 23.5 | 62.0 | 85.0 | 32.2 | 46.8 | 47.4 |
-| **VeriGate** | **36.9** | **28.1** | **64.8** | 84.7 | **33.2** | **47.0** | **49.1** |
+| **VeriOPD** | **36.9** | **28.1** | **64.8** | 84.7 | **33.2** | **47.0** | **49.1** |
 
-VeriGate reaches **49.1** reported average: **+1.3 points** over Sampled-Token OPD and **+1.7 points** over Top-64 OPD. It leads the trained student methods on five of six benchmarks; Sampled-Token OPD retains the highest MATH500 score.
+VeriOPD reaches **49.1** reported average: **+1.3 points** over Sampled-Token OPD and **+1.7 points** over Top-64 OPD. It leads the trained student methods on five of six benchmarks; Sampled-Token OPD retains the highest MATH500 score.
 
 ### 02 · Cross-size transfer
 
@@ -65,9 +75,9 @@ VeriGate reaches **49.1** reported average: **+1.3 points** over Sampled-Token O
 | Teacher | 10.6 | 13.1 | 40.3 | 74.2 | 17.2 | 30.0 | 30.9 |
 | Sampled-Token OPD | 6.5 | 2.1 | 24.8 | 59.1 | 11.5 | 21.6 | 20.9 |
 | Top-64 OPD | **8.5** | **3.3** | 26.4 | 60.1 | 10.7 | 21.4 | 21.7 |
-| **VeriGate** | **8.5** | **3.3** | **30.3** | **60.8** | **11.6** | **22.0** | **22.8** |
+| **VeriOPD** | **8.5** | **3.3** | **30.3** | **60.8** | **11.6** | **22.0** | **22.8** |
 
-VeriGate reaches **22.8**, improving on the initial student by **5.5 points** and Top-64 OPD by **1.1 points**. It matches or exceeds both distillation baselines on every benchmark.
+VeriOPD reaches **22.8**, improving on the initial student by **5.5 points** and Top-64 OPD by **1.1 points**. It matches or exceeds both distillation baselines on every benchmark.
 
 ### 03 · Group-relative extension
 
@@ -79,9 +89,9 @@ VeriGate reaches **22.8**, improving on the initial student by **5.5 points** an
 | Teacher | 36.0 | 29.0 | 65.9 | 87.0 | 35.4 | 49.3 | 50.4 |
 | GRPO | 28.3 | 20.8 | 62.3 | 83.9 | 28.9 | 44.6 | 44.8 |
 | OPD | 32.0 | **31.7** | 65.6 | 85.4 | 28.9 | 46.6 | 48.4 |
-| **VeriGate-GR** | **34.8** | **31.7** | **67.0** | **85.6** | **30.5** | **47.0** | **49.4** |
+| **VeriGRPD** | **34.8** | **31.7** | **67.0** | **85.6** | **30.5** | **47.0** | **49.4** |
 
-VeriGate-GR reaches **49.4**: **+4.6 points** over GRPO and **+1.0 point** over the OPD baseline in this study. It leads or ties the trained student methods across all six benchmarks.
+VeriGRPD reaches **49.4**: **+4.6 points** over GRPO and **+1.0 point** over the OPD baseline in this study. It leads or ties the trained student methods across all six benchmarks.
 
 ### 04 · Gate-direction ablation
 
@@ -92,7 +102,7 @@ VeriGate-GR reaches **49.4**: **+4.6 points** over GRPO and **+1.0 point** over 
 | Student | 24.0 | 15.8 | 60.8 | 80.9 | 27.6 | 42.9 | 42.0 |
 | Teacher | 36.0 | 29.0 | 65.9 | 87.0 | 35.4 | 49.3 | 50.4 |
 | OPD | 34.2 | 26.0 | 63.1 | **85.5** | 31.6 | 46.5 | 47.8 |
-| **VeriGate** | **36.9** | **28.1** | **64.8** | 84.7 | **33.2** | **47.0** | **49.1** |
+| **VeriOPD** | **36.9** | **28.1** | **64.8** | 84.7 | **33.2** | **47.0** | **49.1** |
 | Inverse-Gated | 30.3 | 21.2 | 62.3 | 83.6 | 27.7 | 42.8 | 44.6 |
 
 Reversing the gate reduces the reported average from **49.1 to 44.6** (**−4.5 points**), below the OPD baseline of **47.8**. This comparison supports the role of gate direction in the supplied experiment.

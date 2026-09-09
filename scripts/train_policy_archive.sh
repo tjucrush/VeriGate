@@ -54,13 +54,13 @@ export LOG_PROB_TOP_K=${LOG_PROB_TOP_K:-0}          # 0 = sampled-token OPD; >0 
 export TOP_K_STRATEGY=${TOP_K_STRATEGY:-"only_stu"}
 export REWARD_WEIGHT_MODE=${REWARD_WEIGHT_MODE:-"student_p"}
 
-# *** VeriGate: the ReLU gate ***
-export CORRECTNESS_GATED=${CORRECTNESS_GATED:-True}     # True = VeriGate; False = vanilla OPD baseline
+# *** VeriOPD: the ReLU gate ***
+export CORRECTNESS_GATED=${CORRECTNESS_GATED:-True}     # True = VeriOPD; False = vanilla OPD baseline
 export CORRECTNESS_THRESHOLD=${CORRECTNESS_THRESHOLD:-0.0}
 export CORRECTNESS_GATED_MODE=${CORRECTNESS_GATED_MODE:-default}  # default | inverse (ablation)
 
-# *** VeriGate-GR: group-relative variant ***
-export GRPO_SCALED=${GRPO_SCALED:-False}             # True = VeriGate-GR (needs N_RESPONSES>1)
+# *** VeriGRPD: group-relative variant ***
+export GRPO_SCALED=${GRPO_SCALED:-False}             # True = VeriGRPD (needs N_RESPONSES>1)
 export GRPO_NORM_BY_STD=${GRPO_NORM_BY_STD:-False}   # False = Dr.GRPO style; True = /std
 export GRPO_SCALE_BASELINE=${GRPO_SCALE_BASELINE:-0.0}  # u in scale=|A|+u
 
@@ -80,7 +80,7 @@ export GSPO_CLIP_HIGH=${GSPO_CLIP_HIGH:-0.0004}
 export MAX_PROMPT_LENGTH=${MAX_PROMPT_LENGTH:-1024}
 export MAX_RESP_LENGTH=${MAX_RESP_LENGTH:-8192}
 export MINI_BATCH_SIZE=${MINI_BATCH_SIZE:-256}
-export N_RESPONSES=${N_RESPONSES:-1}                 # group size for VeriGate-GR
+export N_RESPONSES=${N_RESPONSES:-1}                 # group size for VeriGRPD
 export MODEL_DTYPE=${MODEL_DTYPE:-bfloat16}
 export PARALLEL_SIZE=${PARALLEL_SIZE:-1}
 export USE_KL=${USE_KL:-False}
