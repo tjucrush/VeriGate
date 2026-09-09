@@ -61,6 +61,30 @@ The teacher supplies token-level evidence; the verifier determines which signal 
 
 </details>
 
+### VeriGRPD, step by step
+
+<p align="center">
+  <picture>
+    <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/verigrpd-step-5.png">
+    <img src="docs/assets/verigrpd-walkthrough.gif" alt="Six-stage VeriGRPD walkthrough: sample four responses, score teacher evidence, verify and gate, compute group-relative advantages, scale retained signals, and update the student. All illustrated numbers are synthetic examples." width="100%">
+  </picture>
+</p>
+
+**One prompt → a response group → teacher evidence → verifier gate → group-relative scaling → student update.** The animation follows the same four responses throughout, so each retained token signal can be traced to its final reward.
+
+The group term uses **the absolute advantage**: it changes the strength of the gated signal without reversing its sign. In the illustrated 3-correct / 1-wrong group, the scales are `0.50, 0.50, 0.50, 1.50` with `u = 0`. Values are rounded for display.
+
+<details>
+<summary><strong>Explore the group effect and view each stage at your own pace</strong></summary>
+
+<img src="docs/assets/verigrpd-group-effect.svg" alt="Illustrative group effect: mixed binary outcomes produce unequal scales, while identical outcomes produce zero scales when the baseline u is zero." width="100%">
+
+[1. Sample](docs/assets/verigrpd-step-1.png) · [2. Teacher](docs/assets/verigrpd-step-2.png) · [3. Gate](docs/assets/verigrpd-step-3.png) · [4. Group](docs/assets/verigrpd-step-4.png) · [5. Scale](docs/assets/verigrpd-step-5.png) · [6. Update](docs/assets/verigrpd-step-6.png)
+
+</details>
+
+[Read the detailed VeriGRPD walkthrough →](docs/VERIGRPD.md)
+
 <!-- reported-results:start -->
 ## Reported benchmark results
 

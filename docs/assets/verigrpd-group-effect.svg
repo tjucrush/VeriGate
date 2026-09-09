@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="294" viewBox="0 0 1280 294" role="img">
+<rect x="0" y="0" width="1280" height="294" rx="0" fill="#0b1220"/>
+<text x="40" y="51" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="26" font-weight="700" fill="#f3f7ff">WHY THE GROUP MATTERS</text>
+<rect x="40" y="79" width="580" height="178" rx="12" fill="#142235" stroke="#2a3b50"/>
+<text x="60" y="117" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="23" font-weight="700" fill="#65e0c2">Mixed outcomes</text>
+<text x="60" y="151" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#f3f7ff">Scores: 1  /  1  /  1  /  0</text>
+<text x="60" y="191" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#65e0c2">Scales: 0.50 / 0.50 / 0.50 / 1.50</text>
+<text x="60" y="232" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#a6b6cd">Relative differences set response intensity.</text>
+<rect x="660" y="79" width="580" height="178" rx="12" fill="#142235" stroke="#2a3b50"/>
+<text x="680" y="117" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="23" font-weight="700" fill="#a5a0ff">Uniform outcomes</text>
+<text x="680" y="151" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#f3f7ff">Scores: 1  /  1  /  1  /  1</text>
+<text x="680" y="191" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#a5a0ff">Scales: 0.00 / 0.00 / 0.00 / 0.00</text>
+<text x="680" y="232" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#a6b6cd">With u = 0, this group contributes no reward.</text>
+<text x="40" y="284" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="14" font-weight="400" fill="#a6b6cd">Illustrative binary outcomes; sample-std normalization; u = 0. A positive u retains a baseline scale.</text>
+</svg>
