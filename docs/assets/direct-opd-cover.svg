@@ -1,1 +1,58 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="620" viewBox="0 0 1280 620" role="img" aria-label="VeriGate: where to distill"><defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#101527"/><stop offset="1" stop-color="#182a39"/></linearGradient><linearGradient id="line"><stop stop-color="#4ee8c8"/><stop offset="1" stop-color="#9f9bff"/></linearGradient><radialGradient id="orb"><stop stop-color="#6580ec" stop-opacity=".3"/><stop offset="1" stop-color="#101527" stop-opacity="0"/></radialGradient><pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse"><path d="M44 0H0V44" fill="none" stroke="#ffffff" stroke-opacity=".035"/></pattern></defs><rect width="1280" height="620" rx="26" fill="url(#bg)"/><rect width="1280" height="620" rx="26" fill="url(#grid)"/><circle cx="1040" cy="215" r="330" fill="url(#orb)"/><g font-family="Segoe UI,Arial,sans-serif"><text x="68" y="82" font-size="17" letter-spacing="5" fill="#78ddcd">VERIGATE / RESEARCH</text><text x="63" y="203" font-size="88" font-weight="700" letter-spacing="-3" fill="#f3f6ff">Where to distill.</text><text x="68" y="264" font-size="27" fill="#aab8d0">Ordinal supervision for direct on-policy learning.</text><path d="M68 305H1188" stroke="url(#line)" stroke-width="2"/><text x="68" y="356" font-size="16" letter-spacing="3" fill="#83d4cc">ONE RESPONSE. ONE COEFFICIENT BUDGET.</text><text x="68" y="402" font-size="21" fill="#c3ccde">Student prefixes → teacher distributions → allocated KL</text><g transform="translate(68,445)"><rect width="352" height="116" rx="14" fill="#ffffff" fill-opacity=".035" stroke="#8499bf" stroke-opacity=".23"/><text x="20" y="35" font-size="14" fill="#6ce0cd">01 / DIRECT</text><text x="20" y="79" font-size="19" fill="#e3e9f7">Full-vocabulary forward KL</text></g><g transform="translate(450,445)"><rect width="352" height="116" rx="14" fill="#ffffff" fill-opacity=".035" stroke="#8499bf" stroke-opacity=".23"/><text x="20" y="35" font-size="14" fill="#6ce0cd">02 / ORDINAL</text><text x="20" y="79" font-size="19" fill="#e3e9f7">Ordering over score gaps</text></g><g transform="translate(832,445)"><rect width="352" height="116" rx="14" fill="#ffffff" fill-opacity=".035" stroke="#8499bf" stroke-opacity=".23"/><text x="20" y="35" font-size="14" fill="#6ce0cd">03 / CONTROLLED</text><text x="20" y="79" font-size="19" fill="#e3e9f7">Unit-sum supervision</text></g><g transform="translate(1030,145)" fill="url(#line)"><rect x="0" y="86" width="12" height="24" rx="6" opacity="0.4"/><rect x="24" y="68" width="12" height="42" rx="6" opacity="0.54"/><rect x="48" y="50" width="12" height="60" rx="6" opacity="0.68"/><rect x="72" y="30" width="12" height="80" rx="6" opacity="0.8200000000000001"/><rect x="96" y="2" width="12" height="108" rx="6" opacity="0.9600000000000001"/></g></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="560" viewBox="0 0 1280 560" role="img">
+<rect x="0" y="0" width="1280" height="560" rx="0" fill="#0b1220"/>
+<polyline points="760,0 760,455" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="800,0 800,455" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="840,0 840,455" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="880,0 880,455" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="920,0 920,455" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="960,0 960,455" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1000,0 1000,455" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1040,0 1040,455" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1080,0 1080,455" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1120,0 1120,455" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1160,0 1160,455" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1200,0 1200,455" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1240,0 1240,455" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="760,15 1280,15" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="760,55 1280,55" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="760,95 1280,95" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="760,135 1280,135" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="760,175 1280,175" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="760,215 1280,215" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="760,255 1280,255" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="760,295 1280,295" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="760,335 1280,335" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="760,375 1280,375" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="760,415 1280,415" fill="none" stroke="#172437" stroke-width="1" stroke-linejoin="round"/>
+<rect x="56" y="51" width="5" height="22" rx="2" fill="#65e0c2"/>
+<text x="76" y="65" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="700" fill="#65e0c2">VERIGATE  /  ON-POLICY DISTILLATION</text>
+<text x="50" y="200" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="94" font-weight="700" fill="#f3f7ff">VeriGate</text>
+<text x="57" y="274" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="40" font-weight="700" fill="#f3f7ff">Where to distill.</text>
+<text x="58" y="324" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="23" font-weight="400" fill="#a6b6cd">Student contexts. Teacher distributions.</text>
+<text x="58" y="361" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="23" font-weight="400" fill="#a6b6cd">Supervision, deliberately allocated.</text>
+<text x="823" y="81" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#65e0c2">DISAGREEMENT → ALLOCATION</text>
+<rect x="817" y="297" width="25" height="56" rx="6" fill="#a5a0ff"/>
+<rect x="817" y="374" width="25" height="7" rx="3" fill="#34465f"/>
+<rect x="863" y="258" width="25" height="95" rx="6" fill="#65e0c2"/>
+<rect x="863" y="374" width="25" height="7" rx="3" fill="#34465f"/>
+<rect x="909" y="279" width="25" height="74" rx="6" fill="#a5a0ff"/>
+<rect x="909" y="374" width="25" height="7" rx="3" fill="#34465f"/>
+<rect x="955" y="213" width="25" height="140" rx="6" fill="#65e0c2"/>
+<rect x="955" y="374" width="25" height="7" rx="3" fill="#34465f"/>
+<rect x="1001" y="241" width="25" height="112" rx="6" fill="#a5a0ff"/>
+<rect x="1001" y="374" width="25" height="7" rx="3" fill="#34465f"/>
+<rect x="1047" y="172" width="25" height="181" rx="6" fill="#65e0c2"/>
+<rect x="1047" y="374" width="25" height="7" rx="3" fill="#34465f"/>
+<rect x="1093" y="196" width="25" height="157" rx="6" fill="#a5a0ff"/>
+<rect x="1093" y="374" width="25" height="7" rx="3" fill="#34465f"/>
+<rect x="1139" y="133" width="25" height="220" rx="6" fill="#65e0c2"/>
+<rect x="1139" y="374" width="25" height="7" rx="3" fill="#34465f"/>
+<text x="823" y="423" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="14" font-weight="400" fill="#a6b6cd">Illustrative allocation · unit coefficient sum</text>
+<polyline points="56,470 1224,470" fill="none" stroke="#2a3b50" stroke-width="1" stroke-linejoin="round"/>
+<text x="58" y="517" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="700" fill="#65e0c2">01</text>
+<text x="96" y="517" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="700" fill="#f3f7ff">FULL-VOCABULARY KL</text>
+<text x="452" y="517" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="700" fill="#65e0c2">02</text>
+<text x="490" y="517" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="700" fill="#f3f7ff">ORDINAL WEIGHTS</text>
+<text x="846" y="517" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="700" fill="#65e0c2">03</text>
+<text x="884" y="517" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="700" fill="#f3f7ff">CONTROLLED BASELINES</text>
+</svg>
