@@ -14,7 +14,7 @@ def table(rows):
         name = row['method']
         if name in {'VeriOPD', 'VeriGRPD'}:
             name = '**' + name + '**'
-        vals = [f'**{v:.1f}**' if j >= 2 and v == best[i] else f'{v:.1f}' for i, v in enumerate(row['scores'])]
+        vals = [f'**{v:.2f}**' if j >= 2 and v == best[i] else f'{v:.2f}' for i, v in enumerate(row['scores'])]
         out.append('| ' + ' | '.join([name] + vals) + ' |')
     return '\n'.join(out)
 

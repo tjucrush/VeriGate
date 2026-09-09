@@ -23,11 +23,11 @@ Teacher: Qwen3-4B-RL → Student: Qwen3-4B
 
 | Method | AIME24 | AIME25 | AMC | MATH500 | Minerva | OlympiadBench | Avg. |
 | :-- | --: | --: | --: | --: | --: | --: | --: |
-| Student | 24.0 | 15.8 | 60.8 | 80.9 | 27.6 | 42.9 | 42.0 |
-| Teacher | 36.0 | 29.0 | 65.9 | 87.0 | 35.4 | 49.3 | 50.4 |
-| Sampled-Token OPD | 34.2 | 26.0 | 63.1 | **85.5** | 31.6 | 46.5 | 47.8 |
-| Top-64 OPD | 34.6 | 23.5 | 62.0 | 85.0 | 32.2 | 46.8 | 47.4 |
-| **VeriOPD** | **36.9** | **28.1** | **64.8** | 84.7 | **33.2** | **47.0** | **49.1** |
+| Student | 24.00 | 15.80 | 60.80 | 80.90 | 27.60 | 42.90 | 42.00 |
+| Teacher | 36.00 | 29.00 | 65.90 | 87.00 | 35.40 | 49.30 | 50.40 |
+| Sampled-Token OPD | 34.20 | 26.00 | 63.10 | **85.50** | 31.60 | 46.50 | 47.80 |
+| Top-64 OPD | 34.60 | 23.50 | 62.00 | 85.00 | 32.20 | 46.80 | 47.40 |
+| **VeriOPD** | **36.90** | **28.10** | **64.80** | 84.70 | **33.20** | **47.00** | **49.10** |
 
 VeriOPD reaches **49.1** reported average: **+1.3 points** over Sampled-Token OPD and **+1.7 points** over Top-64 OPD. It leads the trained student methods on five of six benchmarks; Sampled-Token OPD retains the highest MATH500 score.
 
@@ -37,11 +37,11 @@ Teacher: Qwen3-4B-Base-RL → Student: Qwen3-1.7B-Base
 
 | Method | AIME24 | AIME25 | AMC | MATH500 | Minerva | OlympiadBench | Avg. |
 | :-- | --: | --: | --: | --: | --: | --: | --: |
-| Student | 4.1 | 1.7 | 23.2 | 48.9 | 8.9 | 17.1 | 17.3 |
-| Teacher | 10.6 | 13.1 | 40.3 | 74.2 | 17.2 | 30.0 | 30.9 |
-| Sampled-Token OPD | 6.5 | 2.1 | 24.8 | 59.1 | 11.5 | 21.6 | 20.9 |
-| Top-64 OPD | **8.5** | **3.3** | 26.4 | 60.1 | 10.7 | 21.4 | 21.7 |
-| **VeriOPD** | **8.5** | **3.3** | **30.3** | **60.8** | **11.6** | **22.0** | **22.8** |
+| Student | 4.10 | 1.70 | 23.20 | 48.90 | 8.90 | 17.10 | 17.30 |
+| Teacher | 10.60 | 13.10 | 40.30 | 74.20 | 17.20 | 30.00 | 30.90 |
+| Sampled-Token OPD | 6.50 | 2.10 | 24.80 | 59.10 | 11.50 | 21.60 | 20.90 |
+| Top-64 OPD | **8.50** | **3.30** | 26.40 | 60.10 | 10.70 | 21.40 | 21.70 |
+| **VeriOPD** | **8.50** | **3.30** | **30.30** | **60.80** | **11.60** | **22.00** | **22.80** |
 
 VeriOPD reaches **22.8**, improving on the initial student by **5.5 points** and Top-64 OPD by **1.1 points**. It matches or exceeds both distillation baselines on every benchmark.
 
@@ -51,11 +51,11 @@ Teacher: Qwen3-4B-RL → Student: Qwen3-4B
 
 | Method | AIME24 | AIME25 | AMC | MATH500 | Minerva | OlympiadBench | Avg. |
 | :-- | --: | --: | --: | --: | --: | --: | --: |
-| Student | 24.0 | 15.8 | 60.8 | 80.9 | 27.6 | 42.9 | 42.0 |
-| Teacher | 36.0 | 29.0 | 65.9 | 87.0 | 35.4 | 49.3 | 50.4 |
-| GRPO | 28.3 | 20.8 | 62.3 | 83.9 | 28.9 | 44.6 | 44.8 |
-| OPD | 32.0 | **31.7** | 65.6 | 85.4 | 28.9 | 46.6 | 48.4 |
-| **VeriGRPD** | **34.8** | **31.7** | **67.0** | **85.6** | **30.5** | **47.0** | **49.4** |
+| Student | 24.00 | 15.80 | 60.80 | 80.90 | 27.60 | 42.90 | 42.00 |
+| Teacher | 36.00 | 29.00 | 65.90 | 87.00 | 35.40 | 49.30 | 50.40 |
+| GRPO | 28.30 | 20.80 | 62.30 | 83.90 | 28.90 | 44.60 | 44.80 |
+| OPD | 32.00 | **31.70** | 65.60 | 85.40 | 28.90 | 46.60 | 48.40 |
+| **VeriGRPD** | **34.80** | **31.70** | **67.00** | **85.60** | **30.50** | **47.00** | **49.40** |
 
 VeriGRPD reaches **49.4**: **+4.6 points** over GRPO and **+1.0 point** over the OPD baseline in this study. It leads or ties the trained student methods across all six benchmarks.
 
@@ -65,11 +65,11 @@ Teacher: Qwen3-4B-RL → Student: Qwen3-4B
 
 | Method | AIME24 | AIME25 | AMC | MATH500 | Minerva | OlympiadBench | Avg. |
 | :-- | --: | --: | --: | --: | --: | --: | --: |
-| Student | 24.0 | 15.8 | 60.8 | 80.9 | 27.6 | 42.9 | 42.0 |
-| Teacher | 36.0 | 29.0 | 65.9 | 87.0 | 35.4 | 49.3 | 50.4 |
-| OPD | 34.2 | 26.0 | 63.1 | **85.5** | 31.6 | 46.5 | 47.8 |
-| **VeriOPD** | **36.9** | **28.1** | **64.8** | 84.7 | **33.2** | **47.0** | **49.1** |
-| Inverse-Gated | 30.3 | 21.2 | 62.3 | 83.6 | 27.7 | 42.8 | 44.6 |
+| Student | 24.00 | 15.80 | 60.80 | 80.90 | 27.60 | 42.90 | 42.00 |
+| Teacher | 36.00 | 29.00 | 65.90 | 87.00 | 35.40 | 49.30 | 50.40 |
+| OPD | 34.20 | 26.00 | 63.10 | **85.50** | 31.60 | 46.50 | 47.80 |
+| **VeriOPD** | **36.90** | **28.10** | **64.80** | 84.70 | **33.20** | **47.00** | **49.10** |
+| Inverse-Gated | 30.30 | 21.20 | 62.30 | 83.60 | 27.70 | 42.80 | 44.60 |
 
 Reversing the gate reduces the reported average from **49.1 to 44.6** (**−4.5 points**), below the OPD baseline of **47.8**. This comparison supports the role of gate direction in the supplied experiment.
 
