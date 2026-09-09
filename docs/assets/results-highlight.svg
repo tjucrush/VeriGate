@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="360" viewBox="0 0 1280 360" role="img">
+<rect x="0" y="0" width="1280" height="360" rx="0" fill="#0b1220"/>
+<text x="44" y="47" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="17" font-weight="700" fill="#65e0c2">VERIGATE / EMPIRICAL STUDIES</text>
+<text x="44" y="99" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="34" font-weight="700" fill="#f3f7ff">Verification-guided learning, measured.</text>
+<rect x="44" y="133" width="382" height="176" rx="12" fill="#142235" stroke="#2a3b50"/>
+<text x="64" y="162" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="14" font-weight="700" fill="#a6b6cd">01 / SAME-SIZE DISTILLATION</text>
+<text x="62" y="227" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="51" font-weight="700" fill="#f3f7ff">49.1</text>
+<text x="192" y="221" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="14" font-weight="400" fill="#a6b6cd">AVG. (%)</text>
+<text x="64" y="261" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="18" font-weight="700" fill="#a5a0ff">VeriGate · 4B → 4B</text>
+<text x="64" y="293" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#65e0c2">+1.3 pp vs. Sampled-Token OPD</text>
+<rect x="449" y="133" width="382" height="176" rx="12" fill="#142235" stroke="#2a3b50"/>
+<text x="469" y="162" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="14" font-weight="700" fill="#a6b6cd">02 / CROSS-SIZE TRANSFER</text>
+<text x="467" y="227" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="51" font-weight="700" fill="#f3f7ff">22.8</text>
+<text x="597" y="221" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="14" font-weight="400" fill="#a6b6cd">AVG. (%)</text>
+<text x="469" y="261" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="18" font-weight="700" fill="#a5a0ff">VeriGate · 4B → 1.7B</text>
+<text x="469" y="293" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#65e0c2">+1.1 pp vs. Top-64 OPD</text>
+<rect x="854" y="133" width="382" height="176" rx="12" fill="#142235" stroke="#2a3b50"/>
+<text x="874" y="162" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="14" font-weight="700" fill="#a6b6cd">03 / GROUP-RELATIVE STUDY</text>
+<text x="872" y="227" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="51" font-weight="700" fill="#f3f7ff">49.4</text>
+<text x="1002" y="221" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="14" font-weight="400" fill="#a6b6cd">AVG. (%)</text>
+<text x="874" y="261" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="18" font-weight="700" fill="#a5a0ff">VeriGate-GR · 4B → 4B</text>
+<text x="874" y="293" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#65e0c2">+4.6 pp vs. GRPO</text>
+<text x="44" y="344" font-family="Segoe UI,DejaVu Sans,sans-serif" font-size="15" font-weight="400" fill="#a6b6cd">Reported experiment records · Six benchmarks · Separate comparison settings</text>
+</svg>
